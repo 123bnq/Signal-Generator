@@ -12,7 +12,7 @@ public class test {
 		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	public static void main(String[] args) {
-		String[] IPList = {"3322.33.22.899", "a.b.c.d", "100", "192.168.137.1"};
+		String[] IPList = {"3322.33.22.899", "a.b.c.d", "100", "192.168.137.1","ashfdjasfdh"};
 		pattern = Pattern.compile(IPPattern);
 		for (String string : IPList) {
 			System.out.println(string + validate(string));
