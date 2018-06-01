@@ -1,3 +1,4 @@
+package Client;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -16,11 +17,8 @@ public class UDPClient {
 			InetAddress addr = InetAddress.getByName("localhost");
 			socket = new DatagramSocket();
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length, addr, port);
-//			socket.receive(receivePacket);
 			String s = "Hello World";
 			sendData = s.getBytes();
-//			String st = new String(sendData);
-//			System.out.println(st);
 			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, addr, port);
 			socket.send(sendPacket);
 			socket.receive(receivePacket);

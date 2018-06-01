@@ -1,3 +1,4 @@
+package Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
-public class Client {
+public class TCPClient {
 	private static Socket socket;
 	private static PrintWriter pw;
 	private static BufferedReader bf;
@@ -22,7 +23,7 @@ public class Client {
 			pw.println("1");
 			pw.close();
 			bf.close();
-			//socket.close();
+			socket.close();
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
