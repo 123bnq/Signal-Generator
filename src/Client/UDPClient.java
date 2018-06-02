@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 
 public class UDPClient {
 	private static DatagramSocket socket;
-	private static int port = 5555;
+	private static int port = 8888;
 	public static void main(String[] args) {
 		byte[] receiveData = new byte[1024];
         byte[] sendData = new byte[1024];
@@ -26,7 +26,7 @@ public class UDPClient {
 			sr = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
 			System.out.println(sr);
 			System.out.println("Client is connected");
-			socket.close();
+//			socket.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

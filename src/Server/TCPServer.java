@@ -11,13 +11,13 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
-public class TCPServer extends Thread{
+public class TCPServer implements Runnable {
 	private String Saddr;
 	private int port;
-	public static ServerSocket server;
-	public static Socket socketObject;
-	public static PrintWriter pw;
-	public static BufferedReader bf;
+	public ServerSocket server;
+	public Socket socketObject;
+	public PrintWriter pw;
+	public BufferedReader bf;
 	private InetAddress addr;
 	public TCPServer(String Saddr, int port) {
 		this.Saddr = Saddr;
@@ -27,7 +27,7 @@ public class TCPServer extends Thread{
 		try {
 			addr = InetAddress.getByName(Saddr);
 			server = new ServerSocket(port, 1, addr);
-			System.out.println("Server start at port " + port);
+			System.out.println("TCPServer start at " + Saddr+ " port " + port);
 			while(true) {
 				
 				socketObject = server.accept();
@@ -49,10 +49,10 @@ public class TCPServer extends Thread{
 				System.out.println("Server on port " + port + " is down!!!");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("unknownHost");;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("IO");;
 		}
 	}
 	public void stopServer() {
@@ -63,6 +63,10 @@ public class TCPServer extends Thread{
 	
 	private void shutdownServer(ServerSocket server) {
 		try {
+			if (socketObject != null){
+				pw.close();
+				bf.close();
+			}
 			server.close();
 			System.out.println("Server on port " + port + " is downxyz!!!");
 		} catch (IOException e) {

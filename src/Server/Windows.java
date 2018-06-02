@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
@@ -16,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Windows {
 
@@ -35,6 +38,8 @@ public class Windows {
 	private JButton btnStartServer;
 	private JButton btnStopServer;
 	private TCPServer tcpserver;
+	private UDPServer udpserver;
+	private Thread tcpthread, udpthread;
 	/**
 	 * Launch the application.
 	 */
@@ -72,6 +77,14 @@ public class Windows {
 		desktopPane.setBackground(UIManager.getColor("Button.background"));
 		frmServerSignal.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
+		WarningIPaddr = new JLabel("");
+		WarningIPaddr.setBounds(145, 70, 46, 14);
+		desktopPane.add(WarningIPaddr);
+		
+		WarningPort = new JLabel("");
+		WarningPort.setBounds(145, 126, 229, 14);
+		desktopPane.add(WarningPort);
+		
 		JLabel lblIpAddress = new JLabel("IP Address:");
 		lblIpAddress.setBounds(57, 42, 68, 14);
 		desktopPane.add(lblIpAddress);
@@ -81,34 +94,53 @@ public class Windows {
 		desktopPane.add(lblPort);
 		
 		IPAddr = new JTextField();
+		IPAddr.setText("localhost");
 		IPAddr.setToolTipText("for example: localhost or 192.168.137.1");
 		IPAddr.setBounds(145, 39, 174, 20);
 		desktopPane.add(IPAddr);
 		IPAddr.setColumns(10);
 		
 		Port = new JTextField();
-		Port.setToolTipText("from 1 to 65536");
+		Port.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if ((key>=e.VK_0&&key<=e.VK_9) || (key>=e.VK_NUMPAD0&&key<=e.VK_NUMPAD9) || key==e.VK_BACK_SPACE) {
+					Port.setEditable(true);
+					WarningPort.setText("");
+				}
+				else {
+					Port.setEditable(false);
+					WarningPort.setText("Only number is accepted");
+				}
+			}
+		});
+		Port.setText("8888");
+		Port.setToolTipText("from 1 to 65535");
 		Port.setBounds(145, 95, 174, 20);
 		desktopPane.add(Port);
 		Port.setColumns(10);
-		
-		WarningIPaddr = new JLabel("");
-		WarningIPaddr.setBounds(145, 70, 46, 14);
-		desktopPane.add(WarningIPaddr);
-		
-		WarningPort = new JLabel("");
-		WarningPort.setBounds(145, 126, 46, 14);
-		desktopPane.add(WarningPort);
 		
 		btnStartServer = new JButton("Start Server");
 		btnStartServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String addr = IPAddr.getText();
+				int port = Integer.parseInt(Port.getText());
+				boolean isPort;
+				if (port>=0 && port<65536){
+					isPort = true;
+				}
+				else
+					isPort = false;
 				System.out.println(addr+validateIPAddress(addr));
 				boolean isLocalhost = IPAddr.getText().equals("localhost");
-				if (isLocalhost | validateIPAddress(addr)) {
-					tcpserver = new TCPServer(addr, Integer.parseInt(Port.getText()));
-					tcpserver.start();
+				if ((isLocalhost | validateIPAddress(addr)) && isPort) {
+					tcpserver = new TCPServer(addr, port);
+					tcpthread = new Thread(tcpserver);
+					tcpthread.start();
+					udpserver = new UDPServer(Integer.parseInt(Port.getText()));
+					udpthread = new Thread(udpserver);
+					udpthread.start();
 					IPAddr.setEditable(false);
 					Port.setEditable(false);
 				}
@@ -127,7 +159,8 @@ public class Windows {
 				IPAddr.setEditable(true);
 				Port.setEditable(true);
 				tcpserver.stopServer();
-				tcpserver.stop();
+				tcpthread.stop();
+				udpthread.stop();
 			}
 		});
 		btnStopServer.setBounds(230, 156, 105, 23);
