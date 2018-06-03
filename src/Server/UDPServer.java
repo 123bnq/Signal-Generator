@@ -41,7 +41,7 @@ public class UDPServer implements Runnable{
 			}
 		} catch (SocketException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("UDP Server is down!!!");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
