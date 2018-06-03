@@ -26,7 +26,7 @@ public class UDPClient {
 			sr = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
 			System.out.println(sr);
 			System.out.println("Client is connected");
-//			socket.close();
+			socket.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -29,7 +29,6 @@ public class TCPServer implements Runnable {
 			server = new ServerSocket(port, 1, addr);
 			System.out.println("TCPServer start at " + Saddr+ " port " + port);
 			while(true) {
-				
 				socketObject = server.accept();
 				try {
 					Thread.sleep(50);
@@ -41,10 +40,6 @@ public class TCPServer implements Runnable {
 				System.out.println("Client is connected");
 			}
 		}
-//			pw.close();
-//			bf.close();
-//			socketObject.close();
-//			server.close();
 		catch (SocketException se) {
 				System.out.println("Server on port " + port + " is down!!!");
 		} catch (UnknownHostException e) {
@@ -53,7 +48,7 @@ public class TCPServer implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("IO");;
-		}
+		}		
 	}
 	public void stopServer() {
 		if (server != null) {

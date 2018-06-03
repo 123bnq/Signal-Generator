@@ -138,7 +138,7 @@ public class Windows {
 					tcpserver = new TCPServer(addr, port);
 					tcpthread = new Thread(tcpserver);
 					tcpthread.start();
-					udpserver = new UDPServer(Integer.parseInt(Port.getText()));
+					udpserver = new UDPServer(Integer.parseInt(Port.getText()), true);
 					udpthread = new Thread(udpserver);
 					udpthread.start();
 					IPAddr.setEditable(false);
@@ -159,8 +159,9 @@ public class Windows {
 				IPAddr.setEditable(true);
 				Port.setEditable(true);
 				tcpserver.stopServer();
-				tcpthread.stop();
-				udpthread.stop();
+				udpserver.shutdownServer();
+//				tcpthread.stop();
+//				udpthread.stop();
 			}
 		});
 		btnStopServer.setBounds(230, 156, 105, 23);
