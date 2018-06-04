@@ -38,10 +38,12 @@ public class test2 extends JComponent {
 	//
 	//  }
 	//  g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
-	    int p = 50;
+	    int p = 100;
 	    int a = 200;
-	//  drawSine(p, a, w, h, g2);
-	    drawSawtooth(g2, w, h, p);
+	    int p1 = 1;
+	    drawSine(p, a, w, h, g2);
+	    drawSawtooth(g2, w, h, p1, 100);
+	    drawSquare(h,w, p1, 100, 10, g2);
 	
 	  
 	}
@@ -76,21 +78,25 @@ public class test2 extends JComponent {
 		}
 		g2.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints); 
 	}
-	public void drawSawtooth(Graphics g2, int w, int h, int freq) {
+	public void drawSawtooth(Graphics g2, int w, int h, int freq, int samplerate) {
 		Polygon p1 = new Polygon();
 		double y;
 		for (int x = 0; x <= w; x++) {
-			y=h-(x-Math.abs(x));
-			p1.addPoint(x, (int)y);
+			y=h-50*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
+			p1.addPoint(x+w, (int)y);
 		}
 		g2.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-		Polygon p2 = new Polygon();
-		for (int x = 0; x >= -w; x--) {
-			y=h-(x-Math.abs(x));
-			p2.addPoint(x, (int)y);
+	}
+	public void drawSquare(int h, int w, int freq, int samplerate, int dutyCycle, Graphics g) {
+		double scaler = (float)freq/(float)samplerate; 
+		double shift = dutyCycle/20.0;
+		Polygon p1 = new Polygon();
+		double y;
+		for (int x = 0; x < 2*w; x++) {
+			y = (h-(x * scaler + shift) % 1 )< dutyCycle ? 50f : 100f;
+			p1.addPoint(x, (int)y);
 		}
-		g2.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
-		
+		g.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
 	}
 }
 
