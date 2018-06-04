@@ -43,6 +43,7 @@ public class Users extends javax.swing.JFrame {
         Picture = new javax.swing.JPanel();
         OK_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
+        Test = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Signal Generator");
@@ -54,6 +55,11 @@ public class Users extends javax.swing.JFrame {
         Freq_Sine.setPaintLabels(true);
         Freq_Sine.setPaintTicks(true);
         Freq_Sine.setValue(0);
+        Freq_Sine.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                Freq_SineStateChanged(evt);
+            }
+        });
 
         Freq_Sine_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Freq_Sine_Label.setText("FREQUENCY (Hz)");
@@ -64,6 +70,11 @@ public class Users extends javax.swing.JFrame {
         Amp_Sine.setPaintTicks(true);
         Amp_Sine.setToolTipText("");
         Amp_Sine.setValue(0);
+        Amp_Sine.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                Amp_SineStateChanged(evt);
+            }
+        });
 
         Amp_Sine_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Amp_Sine_Label.setText("AMPLITUDE");
@@ -93,7 +104,7 @@ public class Users extends javax.swing.JFrame {
                 .addComponent(Freq_Sine_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Freq_Sine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(Amp_Sine_Label)
                 .addGap(18, 18, 18)
                 .addComponent(Amp_Sine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +142,7 @@ public class Users extends javax.swing.JFrame {
                 .addComponent(Mod_Rectangular_Label)
                 .addGap(18, 18, 18)
                 .addComponent(Mod_Rectangular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Rectangular", Rectangular_Panel);
@@ -166,7 +177,7 @@ public class Users extends javax.swing.JFrame {
                 .addComponent(Freq_Sawtooth_Label)
                 .addGap(18, 18, 18)
                 .addComponent(Freq_Sawtooth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Saw Tooth", Sawtooth_Panel);
@@ -193,20 +204,30 @@ public class Users extends javax.swing.JFrame {
 
         Close_Button.setText("Close");
 
+        Test.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Test.setText("0");
+        Test.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(OK_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Close_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Picture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Close_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Picture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(Test, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +236,11 @@ public class Users extends javax.swing.JFrame {
                     .addComponent(jTabbedPane3)
                     .addComponent(Picture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OK_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Close_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Test, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(OK_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Close_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -231,14 +254,40 @@ public class Users extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_OK_ButtonActionPerformed
 
+    private void Freq_SineStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Freq_SineStateChanged
+        // TODO add your handling code here:
+        Test.setText(Integer.toString(Freq_Sine.getValue()));
+    }//GEN-LAST:event_Freq_SineStateChanged
+
+    private void Amp_SineStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Amp_SineStateChanged
+        // TODO add your handling code here:
+        Test.setText(Integer.toString(Amp_Sine.getValue()));
+
+    }//GEN-LAST:event_Amp_SineStateChanged
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }   
+            } catch (ClassNotFoundException ex) {
+                   java.util.logging.Logger.getLogger(Users.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(Users.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                 java.util.logging.Logger.getLogger(Users.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(Users.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+       /* Create and display the form */
        
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Users().setVisible(true);
@@ -261,6 +310,7 @@ public class Users extends javax.swing.JFrame {
     private javax.swing.JPanel Rectangular_Panel;
     private javax.swing.JPanel Sawtooth_Panel;
     private javax.swing.JPanel Sine_Panel;
+    private javax.swing.JLabel Test;
     private javax.swing.JTabbedPane jTabbedPane3;
     // End of variables declaration//GEN-END:variables
 }
