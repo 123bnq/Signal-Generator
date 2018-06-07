@@ -2,16 +2,17 @@ import java.awt.*;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
+import java.awt.geom.GeneralPath;
 
 public class test2 extends JComponent {
 	public test2() {
 	}
-
+        GeneralPath wave;
+        
 	public void paintComponent(Graphics g)
 	{   
 	     //w is x, and h is y (as in x/y values in a graph)
-		int w = this.getWidth()/2;
+            int w = this.getWidth()/2;
 	    int h = this.getHeight()/2;
 	    
 	    Graphics2D g1 = (Graphics2D) g;
@@ -27,7 +28,7 @@ public class test2 extends JComponent {
 	    	g1.drawLine(i*w/2, 0, i*w/2, h*2);
 	    }
 	
-	
+            super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
 	    g2.setStroke(new BasicStroke(2));
 	    g2.setColor(Color.red);
@@ -39,12 +40,16 @@ public class test2 extends JComponent {
 	//  }
 	//  g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 	    int p = 100;
-	    int a = 200;
+	    int a = 100;
 	    int p1 = 1;
-	    drawSine(p, a, w, h, g2);
+            drawSine(p, a, w, h, g2);
 	    drawSawtooth(g2, w, h, p1, 100);
-	    drawSquare(h,w, p1, 100, 10, g2);
-	
+	    //drawSquare(h,w, p1, 1, 1, g2);
+            
+            if(wave == null)
+                initWave();
+            g2.setPaint(Color.red);
+            g2.draw(wave);
 	  
 	}
 
@@ -55,7 +60,7 @@ public class test2 extends JComponent {
 			e.printStackTrace();
 		}
 	    JFrame frame = new JFrame();
-	    frame.setSize(800, 600);
+	    frame.setSize(554, 378);
 	    frame.setTitle("Graphs");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);  
@@ -83,20 +88,66 @@ public class test2 extends JComponent {
 		double y;
 		for (int x = 0; x <= w; x++) {
 			y=h-50*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
+                        
+                       
 			p1.addPoint(x+w, (int)y);
 		}
 		g2.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
+                Polygon p2 = new Polygon();
+		for (int x = 0; x >= -w; x--) {
+			y=h-50*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
+			p2.addPoint(x+w, (int)y-50);
+                        //System.out.println("x+w="+h);
+            
+		}
+                
+                g2.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
+                g2.drawLine(w, h-50, w, h);
+               
 	}
-	public void drawSquare(int h, int w, int freq, int samplerate, int dutyCycle, Graphics g) {
+	/*public void drawSquare(int h, int w, int freq, int samplerate, int dutyCycle, Graphics g) {
 		double scaler = (float)freq/(float)samplerate; 
 		double shift = dutyCycle/20.0;
 		Polygon p1 = new Polygon();
 		double y;
-		for (int x = 0; x < 2*w; x++) {
+		for (int x = 0; x < w; x++) {
 			y = (h-(x * scaler + shift) % 1 )< dutyCycle ? 50f : 100f;
-			p1.addPoint(x, (int)y);
+			p1.addPoint(x+w, (int)y);
+                        //System.out.println("x="+y);
+                      
 		}
 		g.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-	}
+               
+	}*/
+        private void initWave()
+        {
+            float w = getWidth();
+            float h = getHeight();
+            // totalWidth = steps * 2 * dx
+            // dx = totalWidth/2*steps
+            // for dx ~= 100
+            float approxCycles = w/(2*100);
+            // calculate dx to just fit wave into totalWidth (w-1)
+            float dx = (w-1)/(int)Math.round(2*approxCycles);
+            float dy = h/4;      // 100 for a wave height of 200
+            float step = 1*dx;
+            int steps = (int)(w/step);
+            wave = new GeneralPath();
+            float x = 0, y = h/2;
+            wave.moveTo(x,y);
+            for(int j = 0; j < steps; j++)
+            {
+                wave.lineTo(x,y-dy);
+                x += dx;
+                wave.lineTo(x,y-dy);
+                wave.lineTo(x,y+dy);
+                x += dx;
+                wave.lineTo(x,y+dy);
+                wave.lineTo(x,y);
+            }
+            // check fit
+            //float total = steps*2*dx;
+            //System.out.printf("steps = %d\nw-total = %.1f\n", steps, w-total);
+        }
 }
 
