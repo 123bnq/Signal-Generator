@@ -43,7 +43,7 @@ public class test2 extends JComponent {
 	//  g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 	    int p = 100;
 	    int a = 100;
-<<<<<<< HEAD
+
 	    int p1 = 600;
 	    Polygon pol = new Polygon();
         drawSine(pol, p, a, w, h);
@@ -58,24 +58,20 @@ public class test2 extends JComponent {
 	    g3.setColor(Color.black);
 	    g3.drawPolyline(pol1.xpoints, pol1.ypoints, pol1.npoints);
 	    //drawSquare(h,w, p1, 1, 1, g2);
-	    drawSquare();
+	    //drawSquare();
 //        g2.setPaint(Color.red);
-        g2.draw(wave);
+      
 //      g2.clearRect(0, 0, w, h);
-=======
-	    int p1 = 1;
+
+	  
             int Duty_Cycle=100;
-            drawSine(p, a, w, h, g2);
-	    drawSawtooth(g2, w, h, p1, 100);
+           
 	    //drawSquare(h,w, p1, 1, 1, g2);
             drawSquare(h,w,Duty_Cycle,g2);
         
             
             //drawSquare();
-            //g2.setPaint(Color.red);
-         
->>>>>>> 94d4cddb7a0fa412dd37083e2b2d7b1aae4c8125
-	  
+            //g2.setPaint(Color.red); 
 	}
 
 	public static void main(String[] args) {
