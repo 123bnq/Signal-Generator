@@ -5,15 +5,17 @@ import javax.swing.UIManager;
 import java.awt.geom.GeneralPath;
 
 public class test2 extends JComponent {
+	private int freq;
+	private int amp;
 	public test2() {
 
 	}
-        GeneralPath wave;
+    GeneralPath wave;
         
 	public void paintComponent(Graphics g)
 	{   
 	     //w is x, and h is y (as in x/y values in a graph)
-            int w = this.getWidth()/2;
+        int w = this.getWidth()/2;
 	    int h = this.getHeight()/2;
 	    
 	    Graphics2D g1 = (Graphics2D) g;
@@ -74,21 +76,21 @@ public class test2 extends JComponent {
             //g2.setPaint(Color.red); 
 	}
 
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-	    JFrame frame = new JFrame();
-	    frame.setSize(554, 378);
-	    frame.setTitle("Graphs");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setLocationRelativeTo(null);  
-	    test2 draw = new test2();
-	    frame.getContentPane().add(draw);
-	    frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
+//	    JFrame frame = new JFrame();
+//	    frame.setSize(554, 378);
+//	    frame.setTitle("Graphs");
+//	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	    frame.setLocationRelativeTo(null);  
+//	    test2 draw = new test2();
+//	    frame.getContentPane().add(draw);
+//	    frame.setVisible(true);
+//	}
 	public void drawSine(Polygon p1, int freq, int amp, int w, int h) {
 		double y;
 		for (int x =0; x <= w; x++) {
@@ -117,7 +119,7 @@ public class test2 extends JComponent {
 	}
         public void drawSquare(int h, int w, int Duty_Cycle, Graphics2D g2){
             float approxCycles = w/(100);
-            float dx = (w-1)/(int)Math.round(2*approxCycles);
+            float dx = (w-1)/(float)Math.round(2*approxCycles);
             float dy = h/8;
             float step = 2*dx;
             int steps = (int)(w*2/step);
