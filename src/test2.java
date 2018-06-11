@@ -42,14 +42,16 @@ public class test2 extends JComponent {
 	    int p = 100;
 	    int a = 100;
 	    int p1 = 1;
+            int Duty_Cycle=100;
             drawSine(p, a, w, h, g2);
 	    drawSawtooth(g2, w, h, p1, 100);
 	    //drawSquare(h,w, p1, 1, 1, g2);
+            drawSquare(h,w,Duty_Cycle,g2);
+        
             
-       
-            drawSquare();
-            g2.setPaint(Color.red);
-            g2.draw(wave);
+            //drawSquare();
+            //g2.setPaint(Color.red);
+         
 	  
 	}
 
@@ -105,6 +107,29 @@ public class test2 extends JComponent {
                 g2.drawLine(w, h-50, w, h);
                
 	}
+        public void drawSquare(int h, int w, int Duty_Cycle, Graphics2D g2){
+            float approxCycles = w/(100);
+            float dx = (w-1)/(int)Math.round(2*approxCycles);
+            float dy = h/8;
+            float step = 2*dx;
+            int steps = (int)(w*2/step);
+            wave = new GeneralPath();
+            float x = w, y = h;
+            wave.moveTo(x,y);
+            for(int j = 0; j < steps; j++)
+            {
+                wave.lineTo(x,y-dy);
+                x += dx;
+                wave.lineTo(x-50+Duty_Cycle,y-dy);
+                wave.lineTo(x-50+Duty_Cycle,y+dy);
+                x += dx;
+                wave.lineTo(x,y+dy);
+                wave.lineTo(x,y);
+            }
+            g2.draw(wave);
+          
+        }
+            
 	/*public void drawSquare(int h, int w, int freq, int samplerate, int dutyCycle, Graphics g) {
 		double scaler = (float)freq/(float)samplerate; 
 		double shift = dutyCycle/20.0;
@@ -119,7 +144,7 @@ public class test2 extends JComponent {
 		g.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
                
 	}*/
-        private void drawSquare()
+        /*private void drawSquare()
         {
             float w = getWidth();
             float h = getHeight();
@@ -130,10 +155,10 @@ public class test2 extends JComponent {
             // calculate dx to just fit wave into totalWidth (w-1)
             float dx = (w-1)/(int)Math.round(2*approxCycles);
             float dy = h/8;      // 100 for a wave height of 200
-            float step = 1*dx;
+            float step = 2*dx;
             int steps = (int)(w/step);
             wave = new GeneralPath();
-            float x = 0, y = h/2;
+            float x = w/2, y = h/2;
             wave.moveTo(x,y);
             for(int j = 0; j < steps; j++)
             {
@@ -148,6 +173,7 @@ public class test2 extends JComponent {
             // check fit
             //float total = steps*2*dx;
             //System.out.printf("steps = %d\nw-total = %.1f\n", steps, w-total);
-        }
+        */
+        
 }
 
