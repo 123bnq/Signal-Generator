@@ -28,31 +28,35 @@ public class test2 extends JComponent {
 	    	g1.drawLine(0, i*h/2, w*2, i*h/2);
 	    	g1.drawLine(i*w/2, 0, i*w/2, h*2);
 	    }
-
+            int p = 1; //freq of Sine Freq 1~100
+	    int a = 100; // Amplitude of Sine
+     
+	    //int p1 = 1; 
+            int Duty_Cycle=50; // Duty_Cycle of Square  Duty run 1~100
+            
+            int freq=1; //freq of Sawtooth 1~100
 	
             super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
 	    g2.setStroke(new BasicStroke(2));
 	    g2.setColor(Color.black);
             
+            
          
 
-	    int p = 8; //freq of Sine Freq 1~100
-	    int a = 100; // Amplitude of Sine
-     
-	    //int p1 = 1; 
-            int Duty_Cycle=100; // Duty_Cycle of Square  Duty run 1~100
-            int count=15;
-            int freq=8; //freq of Sawtooth 1~100
-	    Polygon pol = new Polygon();
+	   
+	    
+            Polygon pol = new Polygon();
             drawSine(pol, p, a, w, h);
             g2.drawPolyline(pol.xpoints, pol.ypoints, pol.npoints);
             g2.setColor(Color.blue);
+            
             drawSquare(h,w,Duty_Cycle,g2);
             
             Graphics2D g3 = (Graphics2D) g;
 	    g3.setStroke(new BasicStroke(2));
 	    g3.setColor(Color.red);
+            
             drawSawtooth(h,w,freq,g3);
         
            
@@ -81,36 +85,15 @@ public class test2 extends JComponent {
 		}
 	}
         public void drawSawtooth(int h, int w, int freq, Graphics2D g3){
-           
-          
-           
+            freq=(freq+5)/5;
             wave = new GeneralPath();
-            if (freq>5){
-                freq=freq+41;
-                  float approxCycles = w/(freq+1);
+            float approxCycles = freq*w/(150);
             float dx = (w-1)/(float)Math.round(2*approxCycles);
-            float dy = h/8;
-            float step = 2*dx;
-            int steps = (int)(w*2/step);
-            
-            float x = w-25, y = h;
-            wave.moveTo(x+25,y);
-            for(int j = 1; j < 2*steps; j++)
-            {
-                wave.lineTo(x+dx,y-dy);
-                x += dx;
-                wave.lineTo(x,y-dy);
-                wave.lineTo(x,y+dy);
-            }}
-            else {
-                
-                float approxCycles = w/(freq+1);
-            float dx = (w-1)/(float)Math.round(2*approxCycles);
-            float dy = h/8;
+            float dy = h/4;
             float step = 2*dx;
             int steps = (int)(w*2/step);
                  float x = w, y = h;
-            wave.moveTo(x+25,y);
+            wave.moveTo(x,y);
             for(int j = 1; j < 2*steps; j++)
             {
                 wave.lineTo(x+dx,y-dy);
@@ -118,15 +101,13 @@ public class test2 extends JComponent {
                 wave.lineTo(x,y-dy);
                 wave.lineTo(x,y+dy);
             }
-            
-        }
             g3.draw(wave);
         }
 
         public void drawSquare(int h, int w, int Duty_Cycle, Graphics2D g2){
             float approxCycles = w/(95);
             float dx = (w-1)/(float)Math.round(2*approxCycles);
-            float dy = h/4;
+            float dy = h/2;
             float step = 2*dx;
             int steps = (int)(w*2/step);
             wave = new GeneralPath();
