@@ -46,8 +46,8 @@ public class test2 extends JComponent {
 	    drawSawtooth(g2, w, h, p1, 100);
 	    //drawSquare(h,w, p1, 1, 1, g2);
             
-            if(wave == null)
-                initWave();
+       
+            drawSquare();
             g2.setPaint(Color.red);
             g2.draw(wave);
 	  
@@ -119,7 +119,7 @@ public class test2 extends JComponent {
 		g.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
                
 	}*/
-        private void initWave()
+        private void drawSquare()
         {
             float w = getWidth();
             float h = getHeight();
@@ -129,7 +129,7 @@ public class test2 extends JComponent {
             float approxCycles = w/(2*100);
             // calculate dx to just fit wave into totalWidth (w-1)
             float dx = (w-1)/(int)Math.round(2*approxCycles);
-            float dy = h/4;      // 100 for a wave height of 200
+            float dy = h/8;      // 100 for a wave height of 200
             float step = 1*dx;
             int steps = (int)(w/step);
             wave = new GeneralPath();

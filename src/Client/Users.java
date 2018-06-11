@@ -152,7 +152,7 @@ public class Users extends javax.swing.JFrame {
         });
 
         Mod_Rectangular_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Mod_Rectangular_Label.setText("MODULATION (%)");
+        Mod_Rectangular_Label.setText("MODULATION ");
 
         Mod_Test.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Mod_Test.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -164,14 +164,14 @@ public class Users extends javax.swing.JFrame {
         Rectangular_PanelLayout.setHorizontalGroup(
             Rectangular_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Rectangular_PanelLayout.createSequentialGroup()
-                .addComponent(Mod_Rectangular, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(Mod_Rectangular, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Mod_Test, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4))
             .addGroup(Rectangular_PanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addComponent(Mod_Rectangular_Label)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Rectangular_PanelLayout.setVerticalGroup(
             Rectangular_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
