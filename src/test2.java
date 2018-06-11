@@ -6,6 +6,7 @@ import java.awt.geom.GeneralPath;
 
 public class test2 extends JComponent {
 	public test2() {
+
 	}
         GeneralPath wave;
         
@@ -27,8 +28,9 @@ public class test2 extends JComponent {
 	    	g1.drawLine(0, i*h/2, w*2, i*h/2);
 	    	g1.drawLine(i*w/2, 0, i*w/2, h*2);
 	    }
+//	    g1.drawLine(0, h-100, 2*w, h-100);
 	
-            super.paintComponent(g);
+        super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
 	    g2.setStroke(new BasicStroke(2));
 	    g2.setColor(Color.red);
@@ -41,15 +43,24 @@ public class test2 extends JComponent {
 	//  g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 	    int p = 100;
 	    int a = 100;
-	    int p1 = 1;
-            drawSine(p, a, w, h, g2);
-	    drawSawtooth(g2, w, h, p1, 100);
+	    int p1 = 600;
+	    Polygon pol = new Polygon();
+        drawSine(pol, p, a, w, h);
+        g2.drawPolyline(pol.xpoints, pol.ypoints, pol.npoints);
+        g2.setColor(Color.BLACK);
+//        super.paintComponent(g1);
+//        g2 = (Graphics2D)g;
+	    Polygon pol1 = new Polygon();
+	    drawSawtooth(pol1, w, h, p1, 8000, p);
+	    Graphics2D g3 = (Graphics2D) g;
+	    g3.setStroke(new BasicStroke(2));
+	    g3.setColor(Color.black);
+	    g3.drawPolyline(pol1.xpoints, pol1.ypoints, pol1.npoints);
 	    //drawSquare(h,w, p1, 1, 1, g2);
-            
-       
-            drawSquare();
-            g2.setPaint(Color.red);
-            g2.draw(wave);
+	    drawSquare();
+//        g2.setPaint(Color.red);
+        g2.draw(wave);
+//      g2.clearRect(0, 0, w, h);
 	  
 	}
 
@@ -68,42 +79,31 @@ public class test2 extends JComponent {
 	    frame.getContentPane().add(draw);
 	    frame.setVisible(true);
 	}
-	public void drawSine(int freq, int amp, int w, int h, Graphics g2) {
-		Polygon p1 = new Polygon();
+	public void drawSine(Polygon p1, int freq, int amp, int w, int h) {
 		double y;
 		for (int x =0; x <= w; x++) {
-			y=h-amp*Math.sin(Math.PI*(float)(2*freq/1000.0*x/8.0));
+			y=h-amp*Math.sin(Math.PI*(float)(2*freq*x/8000.0));
 			p1.addPoint(x+w,(int)y);
 		}
-		g2.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-		Polygon p2 = new Polygon();
-		for (int x =0; x >= -w; x--) {
-			y=h-amp*Math.sin(Math.PI*(float)(2*freq/1000.0*x/8.0));
-			p2.addPoint(x+w,(int)y);
-		}
-		g2.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints); 
 	}
-	public void drawSawtooth(Graphics g2, int w, int h, int freq, int samplerate) {
-		Polygon p1 = new Polygon();
-		double y;
-		for (int x = 0; x <= w; x++) {
-			y=h-50*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
-                        
-                       
-			p1.addPoint(x+w, (int)y);
+	public void drawSawtooth(Polygon pl, int w, int h, int freq, int samplerate, int amp) {
+//		double y;
+		double xprev = 0.0;
+//		for (int x = 0; x <= w; x++) {
+//			y=h-amp*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
+//			pl.addPoint(x+w, (int)y);
+//		}
+		for (double t = 0; t < 6*Math.PI; t+=0.005) {
+			double x = 0.0;
+			for (int i = 1; i <= w; i++) {
+				x+=Math.sin(i*t)/i;
+			}
+			x = x*2 /Math.PI;
+			pl.addPoint(w+(int)(t*50), h+(int)(xprev*100));
+			xprev = x;
 		}
-		g2.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-                Polygon p2 = new Polygon();
-		for (int x = 0; x >= -w; x--) {
-			y=h-50*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
-			p2.addPoint(x+w, (int)y-50);
-                        //System.out.println("x+w="+h);
-            
-		}
-                
-                g2.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
-                g2.drawLine(w, h-50, w, h);
-               
+//		g2.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
+//               
 	}
 	/*public void drawSquare(int h, int w, int freq, int samplerate, int dutyCycle, Graphics g) {
 		double scaler = (float)freq/(float)samplerate; 
