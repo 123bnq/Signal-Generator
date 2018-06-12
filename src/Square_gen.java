@@ -40,7 +40,7 @@ public class Square_gen extends JComponent {
 		g2.setColor(Color.red);
 		// line1
 		 Polygon p = new Polygon();
-		 PulseTrain(h, w, 2000, 50, p, 100, 8000);
+		 PulseTrain(h, w, 700, 30, p, 70, 8000, 100);
 		 g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 //		int Duty_Cycle = 100;
 
@@ -73,7 +73,7 @@ public class Square_gen extends JComponent {
 //
 //	}
 //	
-	public void PulseTrain(int h, int w, int n, int DutyCycle, Polygon p, int freq, int samplingRate) {
+	public void PulseTrain(int h, int w, int n, int DutyCycle, Polygon p, int freq, int samplingRate, int amp) {
 		double y;
 		double duty = DutyCycle/100.0;
 		double tau = duty/(double)freq;
@@ -85,15 +85,15 @@ public class Square_gen extends JComponent {
 			for (int j = 1; j < n; j++) {
 				sin = Math.sin(Math.PI*(double)j*freq*tau);
 				
-				cos = Math.cos(2*Math.PI*j*freq/(double)samplingRate*(double)i);
+				cos = Math.cos(2*Math.PI*j*freq*((double)i/(double)samplingRate-(tau/2.0)));
 				
 //				y+= 2.0/((double)j*Math.PI)*Math.sin(Math.PI*(double)j*freq/(double)samplingRate*tau)
 //						*Math.cos(2*Math.PI*j*freq/(double)samplingRate*(double)i);
 				y+= 2.0/((double)j*Math.PI)*sin*cos;
 //				System.out.println(y);
 			}
-			y=y*50;
-			p.addPoint(w+i, h-(int)y);
+			y=y*amp;
+			p.addPoint(w+i, h+(int)(amp/2.0)-(int)y);
 		}
 	}
 }
