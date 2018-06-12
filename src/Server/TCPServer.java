@@ -1,4 +1,5 @@
 package Server;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,46 +20,82 @@ public class TCPServer implements Runnable {
 	public PrintWriter pw;
 	public BufferedReader bf;
 	private InetAddress addr;
+	private String mode = "";
+	private int freq;
+	private int amp;
+	private int PWM;
+
 	public TCPServer(String Saddr, int port) {
 		this.Saddr = Saddr;
 		this.port = port;
 	}
+
 	public void run() {
 		try {
 			addr = InetAddress.getByName(Saddr);
 			server = new ServerSocket(port, 1, addr);
-			System.out.println("TCPServer start at " + Saddr+ " port " + port);
-			while(true) {
+			System.out.println("TCPServer start at " + Saddr + " port " + port);
+			while (true) {
 				socketObject = server.accept();
 				try {
 					Thread.sleep(50);
-				} catch (Exception e) {}
-				pw = new PrintWriter(new OutputStreamWriter(socketObject.getOutputStream(), StandardCharsets.UTF_8), true);
+				} catch (Exception e) {
+				}
+				pw = new PrintWriter(new OutputStreamWriter(socketObject.getOutputStream(), StandardCharsets.UTF_8),
+						true);
 				bf = new BufferedReader(new InputStreamReader(socketObject.getInputStream(), StandardCharsets.UTF_8));
 				pw.println("Hello World");
-				while (!bf.readLine().equals("1"));
+				while (!bf.readLine().equals("1"))
+					;
 				System.out.println("Client is connected");
+
+				while ((mode = bf.readLine()) != null) {
+					switch (mode) {
+					case "sine":
+						freq = Integer.parseInt(bf.readLine());
+						amp = Integer.parseInt(bf.readLine());
+						System.out.println(freq + " " + amp);
+						// calculate the array signal
+						break;
+					case "rectangle":
+						PWM = Integer.parseInt(bf.readLine());
+						System.out.println(PWM);
+						// calculate the array signal
+						break;
+					case "sawtooth":
+						freq = Integer.parseInt(bf.readLine());
+						System.out.println(freq);
+						// calculate the array signal
+						break;
+					default:
+						break;
+					}
+
+					// set the flag for UDP to transfer the array
+				}
 			}
-		}
-		catch (SocketException se) {
-				System.out.println("Server on port " + port + " is down!!!");
+		} catch (SocketException se) {
+			System.out.println("Server on port " + port + " is down!!!");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			System.out.println("unknownHost");;
+			System.out.println("unknownHost");
+			;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("IO");;
-		}		
+			System.out.println("IO");
+			;
+		}
 	}
+
 	public void stopServer() {
 		if (server != null) {
 			shutdownServer(server);
 		}
 	}
-	
+
 	private void shutdownServer(ServerSocket server) {
 		try {
-			if (socketObject != null){
+			if (socketObject != null) {
 				pw.close();
 				bf.close();
 			}
