@@ -28,13 +28,13 @@ public class test2 extends JComponent {
 	    	g1.drawLine(0, i*h/2, w*2, i*h/2);
 	    	g1.drawLine(i*w/2, 0, i*w/2, h*2);
 	    }
-            int p = 1; //freq of Sine Freq 1~100
+            int p = 100; //freq of Sine Freq 1~100
 	    int a = 100; // Amplitude of Sine
      
 	    //int p1 = 1; 
             int Duty_Cycle=50; // Duty_Cycle of Square  Duty run 1~100
             
-            int freq=1; //freq of Sawtooth 1~100
+            int freq=100; //freq of Sawtooth 1~100
 	
             super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
@@ -80,12 +80,12 @@ public class test2 extends JComponent {
 	public void drawSine(Polygon p1, int freq, int amp, int w, int h) {
 		double y;
 		for (int x =0; x <= w; x++) {
-			y=h-amp*Math.sin(Math.PI*(float)(2*freq*x/80.0));
+			y=h-amp*Math.sin(Math.PI*(float)(2*(freq+20)/20*x/95.0));
 			p1.addPoint(x+w,(int)y);
 		}
 	}
         public void drawSawtooth(int h, int w, int freq, Graphics2D g3){
-            freq=(freq+5)/5;
+            freq=(freq+20)/20;
             wave = new GeneralPath();
             float approxCycles = freq*w/(150);
             float dx = (w-1)/(float)Math.round(2*approxCycles);
