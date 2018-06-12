@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
 //		contentPane.add(sin);
 //		contentPane.add(draw);
 //		contentPane.add(saw);
-//		contentPane.add(square);
+		contentPane.add(square);
 		
 		contentPane.add(panel, BorderLayout.SOUTH);
 		sin_btn.addActionListener(new ActionListener() {
