@@ -12,7 +12,7 @@ public class Sawtooth_gen extends JComponent {
 	public Sawtooth_gen() {
 		// TODO Auto-generated constructor stub
 	}
-<<<<<<< HEAD
+
         GeneralPath wave;
 	public void paintComponent(Graphics g)
 	{   
@@ -32,8 +32,8 @@ public class Sawtooth_gen extends JComponent {
 	    	g1.drawLine(0, i*h/2, w*2, i*h/2);
 	    	g1.drawLine(i*w/2, 0, i*w/2, h*2);
 	    }
-            int p = 100;
-            int p1 = 100;
+            int p = 100; //amplitude
+            int p1 = 100; //freq
             super.paintComponent(g);
 	   
 
@@ -66,31 +66,15 @@ public class Sawtooth_gen extends JComponent {
 //            g3.draw(wave);
 //        }
         public void drawSawtooth(Polygon p1, int w, int h,int n, int freq, int samplerate, int amp) {
-//		double y;
-		/*double xprev = 0.0;
-//		for (int x = 0; x <= w; x++) {
-//			y=h-amp*(x%(samplerate/(float)freq))/(samplerate/(float)freq);
-//			pl.addPoint(x+w, (int)y);
-//		}
-		for (double t = 0; t < 6*Math.PI; t+=0.005) {
-			double x = 0.0;
-			for (int i = 1; i <= w; i++) {
-				x+=Math.sin(i*t)/i;
-			}
-			x = x*2 /Math.PI;
-			p1.addPoint(w+(int)(t*50), h+(int)(xprev*100));
-			xprev = x;
-		}*/
-               
+           
                 double y=0;
                 double sin;
-                int a=1;
                 for (int x=0;x<=w;x++){
                     y=0;
                     for (int j = 1; j < n; j++) {
                         
                         //sin= -(double)(1/(double)j)*Math.pow(-1,j)*Math.sin(2*Math.PI*j*(double)(freq*x/8000));
-                        sin=-(double)(100/(double)j)*Math.pow(-1,j)*Math.sin(2*Math.PI*(double)j*(freq*(double)x/8000));
+                        sin=-(double)(amp/(double)j)*Math.pow(-1,j)*Math.sin(2*Math.PI*(double)j*(freq*(double)x/8000));
                         y=y+sin;
                         //System.out.println(sin);
                     }
@@ -98,11 +82,11 @@ public class Sawtooth_gen extends JComponent {
                     p1.addPoint(w+x,h-(int)y);
                 }
 }}
-=======
 
-	GeneralPath wave;
 
-	public void paintComponent(Graphics g) {
+
+
+/*	public void paintComponent(Graphics g) {
 		// w is x, and h is y (as in x/y values in a graph)
 		int w = this.getWidth() / 2;
 		int h = this.getHeight() / 2;
@@ -131,7 +115,7 @@ public class Sawtooth_gen extends JComponent {
 		drawSawtooth(pol1, w, h, p1, 8000, p);
 
 		g3.drawPolyline(pol1.xpoints, pol1.ypoints, pol1.npoints);
-	}
+	}*/
 
 	// public void drawSawtooth(int h, int w, int freq, Graphics2D g3){
 	// freq=(freq+20)/20;
@@ -152,7 +136,7 @@ public class Sawtooth_gen extends JComponent {
 	// }
 	// g3.draw(wave);
 	// }
-	public void drawSawtooth(Polygon p1, int w, int h, int freq, int samplerate, int amp) {
+//	public void drawSawtooth(Polygon p1, int w, int h, int freq, int samplerate, int amp) {
 		// double y;
 //		double xprev = 0.0;
 //		// for (int x = 0; x <= w; x++) {
@@ -169,11 +153,11 @@ public class Sawtooth_gen extends JComponent {
 //			xprev = x;
 //		}
 		// solution 1
-		double y = 0.0;
-		for (int i = 0; i < w; i++) {
-			y = -2*amp/Math.PI*Math.atan(1/Math.tan(Math.PI*i*(double)freq/(double)samplerate));
-			p1.addPoint(w+i, h-(int)Math.round(y));
-		}
-	}
-}
->>>>>>> d79fdda0560f750055ff2bd7819f35fadba36b0b
+//		double y = 0.0;
+//		for (int i = 0; i < w; i++) {
+//			y = -2*amp/Math.PI*Math.atan(1/Math.tan(Math.PI*i*(double)freq/(double)samplerate));
+//			p1.addPoint(w+i, h-(int)Math.round(y));
+//		}
+	//}
+//}
+
