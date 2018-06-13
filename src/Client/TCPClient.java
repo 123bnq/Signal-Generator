@@ -21,6 +21,13 @@ public class TCPClient {
 			bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 			System.out.println(bf.readLine());
 			pw.println("1");
+			pw.println("sine");
+			pw.println("200");
+			pw.println("10");
+			pw.println("rectangle");
+			pw.println("50");
+			pw.println("sawtooth");
+			pw.println("299");
 			pw.close();
 			bf.close();
 			socket.close();
