@@ -40,7 +40,7 @@ public class Square_gen extends JComponent {
 		g2.setColor(Color.red);
 		// line1
 		 Polygon p = new Polygon();
-		 PulseTrain(h, w, 700, 30, p, 70, 8000, 100);
+		 PulseTrain(h, w, 1000, 30, p, 50, 8000, 100);
 		 g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 //		int Duty_Cycle = 100;
 
@@ -93,7 +93,8 @@ public class Square_gen extends JComponent {
 //				System.out.println(y);
 			}
 			y=y*amp;
-			p.addPoint(w+i, h+(int)(amp/2.0)-(int)y);
+                        
+			p.addPoint(w+i, h-(int)y);
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class Display extends javax.swing.JFrame {
     static Sine_gen sin = new Sine_gen();
     static Sawtooth_gen saw = new Sawtooth_gen();
     static Square_gen square = new Square_gen();
-        
+    JFrame frame;
     public Display() {
         initComponents();
         
@@ -109,19 +109,38 @@ public class Display extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Sawtooth_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sawtooth_BtnActionPerformed
-        Graph.add(sin);
-        getContentPane().add(Graph,BorderLayout.SOUTH);
-        setSize(400,300);
-        setLocationRelativeTo(null);
+            
+            //JFrame frame = new JFrame();
+            if (frame != null) {
+                frame.dispose();
+                frame = null;
+                System.out.println(frame==null);
+            } if (frame == null) {
+                frame = new JFrame();
+            }
+	    frame.setSize(776, 471);
+	    frame.setTitle("Graphs");
+	    frame.setLocationRelativeTo(null);  
+	    Sawtooth_gen draw = new Sawtooth_gen();
+	    frame.getContentPane().add(draw);
+	    frame.setVisible(true);
+            
         
     }//GEN-LAST:event_Sawtooth_BtnActionPerformed
 
     private void Sine_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sine_BtnActionPerformed
         // TODO add your handling code here:
-          JFrame frame = new JFrame();
+            //JFrame frame = new JFrame();
+            if (frame != null) {
+                frame.dispose();
+                frame = null;
+                System.out.println(frame==null);
+            } if (frame == null) {
+                frame = new JFrame();
+            }
 	    frame.setSize(776, 471);
 	    frame.setTitle("Graphs");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);  
 	    Sine_gen draw = new Sine_gen();
 	    frame.getContentPane().add(draw);
@@ -131,10 +150,17 @@ public class Display extends javax.swing.JFrame {
 
     private void Square_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Square_BtnActionPerformed
         // TODO add your handling code here:
-          JFrame frame = new JFrame();
+          //JFrame frame = new JFrame();
+            if (frame != null) {
+                frame.dispose();
+                frame = null;
+                System.out.println(frame==null);
+            } if (frame == null) {
+                frame = new JFrame();
+            }
 	    frame.setSize(776, 471);
 	    frame.setTitle("Graphs");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);  
 	    Square_gen draw = new Square_gen();
 	    frame.getContentPane().add(draw);
