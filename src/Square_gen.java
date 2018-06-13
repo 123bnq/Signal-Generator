@@ -93,7 +93,7 @@ public class Square_gen extends JComponent {
 //				System.out.println(y);
 			}
 			y=y*amp;
-			p.addPoint(w+i, h+(int)(amp/2.0)-(int)y);
+			p.addPoint(w+i, h-(int)Math.round(y));
 		}
 	}
 }
