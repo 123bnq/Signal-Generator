@@ -8,7 +8,7 @@ import java.awt.geom.GeneralPath;
 import javax.swing.JComponent;
 
 public class Square_gen extends JComponent {
-
+        int signal[];
 	public Square_gen() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,7 +19,7 @@ public class Square_gen extends JComponent {
 		// w is x, and h is y (as in x/y values in a graph)
 		int w = this.getWidth() / 2;
 		int h = this.getHeight() / 2;
-
+                signal = new int[w+1];
 		Graphics2D g1 = (Graphics2D) g;
 		g1.setStroke(new BasicStroke(2));
 		g1.setColor(Color.black);
@@ -40,7 +40,10 @@ public class Square_gen extends JComponent {
 		g2.setColor(Color.red);
 		// line1
 		 Polygon p = new Polygon();
-		 PulseTrain(h, w, 1000, 30, p, 50, 8000, 100);
+		 PulseTrain(h, w, 1000, 30, 50, 8000, 100,signal);
+                for (int i=0;i<=w;i++){
+                    p.addPoint(w+i,h-signal[i]);
+                 }
 		 g2.drawPolyline(p.xpoints, p.ypoints, p.npoints);
 //		int Duty_Cycle = 100;
 
@@ -73,7 +76,7 @@ public class Square_gen extends JComponent {
 //
 //	}
 //	
-	public void PulseTrain(int h, int w, int n, int DutyCycle, Polygon p, int freq, int samplingRate, int amp) {
+	public void PulseTrain(int h, int w, int n, int DutyCycle, int freq, int samplingRate, int amp,int[] signal) {
 		double y;
 		double duty = DutyCycle/100.0;
 		double tau = duty/(double)freq;
@@ -93,11 +96,11 @@ public class Square_gen extends JComponent {
 //				System.out.println(y);
 			}
 			y=y*amp;
-
+                        signal[i]=(int)y;
                         
-			p.addPoint(w+i, h-(int)y);
+			//p.addPoint(w+i, h-(int)y);
 
-			p.addPoint(w+i, h-(int)Math.round(y));
+			//p.addPoint(w+i, h-(int)Math.round(y));
 
 		}
 	}

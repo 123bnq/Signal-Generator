@@ -8,7 +8,7 @@ import java.awt.geom.GeneralPath;
 import javax.swing.JComponent;
 
 public class Sawtooth_gen extends JComponent {
-
+        int signal[];
 	public Sawtooth_gen() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,7 +19,7 @@ public class Sawtooth_gen extends JComponent {
              //w is x, and h is y (as in x/y values in a graph)
             int w = this.getWidth()/2;
 	    int h = this.getHeight()/2;
-	    
+	    signal = new int[w+1];
 	    Graphics2D g1 = (Graphics2D) g;
 	    g1.setStroke(new BasicStroke(2));
 	    g1.setColor(Color.black);
@@ -42,7 +42,12 @@ public class Sawtooth_gen extends JComponent {
 	    g3.setColor(Color.red);
             
             Polygon pol1 = new Polygon();
-	    drawSawtooth(pol1, w, h,50, p1, 8000, p);
+            drawSawtooth(w, h,50, p1, 8000, p,signal);
+            for (int i=0;i<=w;i++){
+                pol1.addPoint(w+i,h-signal[i]);
+            }
+          
+	    
 	    
 	    g3.drawPolyline(pol1.xpoints, pol1.ypoints, pol1.npoints);
 	}
@@ -65,7 +70,7 @@ public class Sawtooth_gen extends JComponent {
 //            }
 //            g3.draw(wave);
 //        }
-        public void drawSawtooth(Polygon p1, int w, int h,int n, int freq, int samplerate, int amp) {
+        public void drawSawtooth(int w, int h,int n, int freq, int samplerate, int amp,int[] signal) {
            
                 double y=0;
                 double sin;
@@ -78,8 +83,8 @@ public class Sawtooth_gen extends JComponent {
                         y=y+sin;
                         //System.out.println(sin);
                     }
-                    
-                    p1.addPoint(w+x,h-(int)y);
+                    signal[x]=(int)y;
+//                    p1.addPoint(w+x,h-(int)y);
                 }
 }}
 //	public void drawSawtooth(Polygon p1, int w, int h, int freq, int samplerate, int amp) {
