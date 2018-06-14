@@ -133,7 +133,7 @@ public class Windows {
 				else
 					isPort = false;
 				System.out.println(addr+validateIPAddress(addr));
-				boolean isLocalhost = IPAddr.getText().equals("localhost");
+				boolean isLocalhost = addr.equals("localhost");
 				if ((isLocalhost | validateIPAddress(addr)) && isPort) {
 					tcpserver = new TCPServer(addr, port);
 					tcpthread = new Thread(tcpserver);
@@ -143,10 +143,14 @@ public class Windows {
 					udpthread.start();
 					IPAddr.setEditable(false);
 					Port.setEditable(false);
+					btnStopServer.setEnabled(true);
+					btnStartServer.setEnabled(false);
 				}
 				else {
 					IPAddr.setText("");
+					IPAddr.setEditable(true);
 					Port.setText("");
+					Port.setEditable(true);
 				}
 			}
 		});
@@ -156,15 +160,18 @@ public class Windows {
 		btnStopServer = new JButton("Stop Server");
 		btnStopServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnStartServer.setEnabled(true);
 				IPAddr.setEditable(true);
 				Port.setEditable(true);
 				tcpserver.stopServer();
 				udpserver.shutdownServer();
+				btnStopServer.setEnabled(false);
 //				tcpthread.stop();
 //				udpthread.stop();
 			}
 		});
 		btnStopServer.setBounds(230, 156, 105, 23);
+		btnStopServer.setEnabled(false);
 		desktopPane.add(btnStopServer);
 	}
 	public boolean validateIPAddress(final String ipaddress) {

@@ -5,16 +5,22 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.nio.charset.Charset;
 
-public class UDPClient {
-	private static DatagramSocket socket;
-	private static int port = 8888;
-	public static void main(String[] args) {
-		byte[] receiveData = new byte[1024];
-        byte[] sendData = new byte[1024];
+public class UDPClient implements Runnable{
+	private DatagramSocket socket;
+	private String IPaddr;
+	private int port;
+	private byte[] receiveData = new byte[1024];
+	private byte[] sendData = new byte[1024];
+	public UDPClient(String IPaddr, int port) {
+		this.IPaddr = IPaddr;
+		this.port = port;
+	}
+	@Override
+	public void run() {
+		
 		try {
-			InetAddress addr = InetAddress.getByName("localhost");
+			InetAddress addr = InetAddress.getByName(IPaddr);
 			socket = new DatagramSocket();
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length, addr, port);
 			String s = "Hello World";
@@ -37,8 +43,16 @@ public class UDPClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
+	}
+	
+	public void closeConnection() {
+		socket.close();
+	}
+	public byte[] getReceiveData() {
+		return receiveData;
+	}
+	public void setSendData(byte[] sendData) {
+		this.sendData = sendData;
 	}
 
 }
