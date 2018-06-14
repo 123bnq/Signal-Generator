@@ -1,6 +1,8 @@
 package Server;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -24,6 +26,8 @@ public class TCPServer implements Runnable {
 	private int freq;
 	private int amp;
 	private int PWM;
+	private ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    private DataOutputStream dos = new DataOutputStream(bos);
 
 	public TCPServer(String Saddr, int port) {
 		this.Saddr = Saddr;

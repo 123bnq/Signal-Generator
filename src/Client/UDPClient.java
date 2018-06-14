@@ -12,6 +12,8 @@ public class UDPClient implements Runnable{
 	private int port;
 	private byte[] receiveData = new byte[1024];
 	private byte[] sendData = new byte[1024];
+	private boolean received = false;
+	private String receivedString;
 	public UDPClient(String IPaddr, int port) {
 		this.IPaddr = IPaddr;
 		this.port = port;
@@ -32,7 +34,27 @@ public class UDPClient implements Runnable{
 			sr = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
 			System.out.println(sr);
 			System.out.println("Client is connected");
-			socket.close();
+			while (true) {
+				socket.receive(receivePacket);
+				received = true;
+				receivedString = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
+				switch (receivedString) {
+				case "sine":	
+					break;
+				case "rectangle":
+					break;
+				case "sawtooth":
+					break;
+				default:
+					break;
+				}
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,6 +75,12 @@ public class UDPClient implements Runnable{
 	}
 	public void setSendData(byte[] sendData) {
 		this.sendData = sendData;
+	}
+	public boolean isReceived() {
+		return received;
+	}
+	public void setReceived(boolean received) {
+		this.received = received;
 	}
 
 }

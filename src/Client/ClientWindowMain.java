@@ -35,6 +35,8 @@ public class ClientWindowMain extends JFrame {
 	
 	private JButton btnConnect;
 	private JButton btnDisconnect;
+	
+	private Display dsp;
 
 	/**
 	 * Launch the application.
@@ -122,6 +124,7 @@ public class ClientWindowMain extends JFrame {
 					udp = new UDPClient(IPaddr, port);
 					udpThread = new Thread(udp);
 					udpThread.start();
+					dsp = new Display(tcp, udp);
 					btnDisconnect.setEnabled(true);
 					btnConnect.setEnabled(false);
 				}

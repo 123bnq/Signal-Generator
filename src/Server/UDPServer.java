@@ -38,6 +38,9 @@ public class UDPServer implements Runnable{
 				buffer = "Twitch Prime".getBytes();
 				packet = new DatagramPacket(buffer, buffer.length, address, port);
 				socket.send(packet);
+				while (true) {
+					
+				}
 			}
 		} catch (SocketException e1) {
 			// TODO Auto-generated catch block
