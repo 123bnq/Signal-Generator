@@ -125,6 +125,8 @@ public class ClientWindowMain extends JFrame {
 					udpThread = new Thread(udp);
 					udpThread.start();
 					dsp = new Display(tcp, udp);
+					IPAddrField.setEditable(false);
+					PortField.setEditable(false);
 					btnDisconnect.setEnabled(true);
 					btnConnect.setEnabled(false);
 				}
@@ -143,6 +145,8 @@ public class ClientWindowMain extends JFrame {
 		btnDisconnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnConnect.setEnabled(true);
+				IPAddrField.setEditable(true);
+				PortField.setEditable(true);
 				tcp.closeConnection();
 				udp.closeConnection();
 				btnDisconnect.setEnabled(false);

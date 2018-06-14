@@ -23,9 +23,10 @@ public class TCPServer implements Runnable {
 	public BufferedReader bf;
 	private InetAddress addr;
 	private String mode = "";
-	private int freq;
-	private int amp;
-	private int PWM;
+	private int sineFreq;
+	private int sineAmp;
+	private int squarePWM;
+	private int sawtoothFreq;
 	private ByteArrayOutputStream bos = new ByteArrayOutputStream();
     private DataOutputStream dos = new DataOutputStream(bos);
 
@@ -56,19 +57,19 @@ public class TCPServer implements Runnable {
 				while ((mode = bf.readLine()) != null) {
 					switch (mode) {
 					case "sine":
-						freq = Integer.parseInt(bf.readLine());
-						amp = Integer.parseInt(bf.readLine());
-						System.out.println(freq + " " + amp);
+						sineFreq = Integer.parseInt(bf.readLine());
+						sineAmp = Integer.parseInt(bf.readLine());
+						System.out.println("sine: " + sineFreq + " " + sineAmp);
 						// calculate the array signal
 						break;
 					case "rectangle":
-						PWM = Integer.parseInt(bf.readLine());
-						System.out.println(PWM);
+						squarePWM = Integer.parseInt(bf.readLine());
+						System.out.println("Square: " + squarePWM);
 						// calculate the array signal
 						break;
 					case "sawtooth":
-						freq = Integer.parseInt(bf.readLine());
-						System.out.println(freq);
+						sawtoothFreq = Integer.parseInt(bf.readLine());
+						System.out.println("Sawtooth: " + sawtoothFreq);
 						// calculate the array signal
 						break;
 					default:
