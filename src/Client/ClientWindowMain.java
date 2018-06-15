@@ -72,6 +72,7 @@ public class ClientWindowMain extends JFrame {
 		contentPane.setLayout(null);
 		
 		IPAddrField = new JTextField();
+		IPAddrField.setToolTipText("for example: localhost or 192.168.137.1");
 		IPAddrField.setText("localhost");
 		IPAddrField.setBounds(172, 70, 154, 20);
 		contentPane.add(IPAddrField);
@@ -86,6 +87,7 @@ public class ClientWindowMain extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		PortField = new JTextField();
+		PortField.setToolTipText("from 1 to 65535");
 		PortField.setText("8888");
 		PortField.addKeyListener(new KeyAdapter() {
 			@Override

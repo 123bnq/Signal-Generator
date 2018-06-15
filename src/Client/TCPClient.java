@@ -47,7 +47,7 @@ public class TCPClient implements Runnable {
 					pw.println(SineAmp);
 					sendSine = false;
 				} else if (sendSquare) {
-					pw.println("rectangle");
+					pw.println("square");
 					pw.println(SquarePWM);
 					sendSquare = false;
 				} else if (sendSawtooth) {
