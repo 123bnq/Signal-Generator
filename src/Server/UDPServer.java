@@ -23,6 +23,7 @@ public class UDPServer implements Runnable {
 
 	private ByteArrayOutputStream bos = new ByteArrayOutputStream();
     private DataOutputStream dos = new DataOutputStream(bos);
+	private boolean Connected;
 
 	public UDPServer(int port) {
 		this.port = port;
@@ -48,7 +49,8 @@ public class UDPServer implements Runnable {
 				buffer = "Twitch Prime".getBytes();
 				packet = new DatagramPacket(buffer, buffer.length, address, port);
 				socket.send(packet);
-				while (true) {
+				Connected = true;
+				while (Connected) {
 					try {
 						Thread.sleep(50);
 					} catch (Exception e) {
@@ -99,5 +101,9 @@ public class UDPServer implements Runnable {
 
 	public void setSignalName(String signalName) {
 		this.signalName = signalName;
+	}
+
+	public void setConnected(boolean connected) {
+		Connected = connected;
 	}
 }

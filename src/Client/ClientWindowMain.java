@@ -26,7 +26,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 	private JTextField IPAddrField;
 	private JTextField PortField;
 	private static TCPClient tcp;
-	private static UDPClient udp;
+	private UDPClient udp;
 	private static Thread tcpThread;
 	private static Thread udpThread;
 	private static Pattern IPPattern;
@@ -159,11 +159,12 @@ public class ClientWindowMain extends JFrame implements Runnable {
 				IPAddrField.setEditable(true);
 				PortField.setEditable(true);
 				tcp.closeConnection();
-				udp.closeConnection();
+//				udp.closeConnection();
 				btnDisconnect.setEnabled(false);
 				dsp.setVisible(false);
 				if (frame != null) {
 					frame.setVisible(false);
+					frame = null;
 				}
 				t.stop();
 			}
@@ -185,10 +186,12 @@ public class ClientWindowMain extends JFrame implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("Start Connection");
 		tcp = new TCPClient(IPAddrField.getText(), Integer.parseInt(PortField.getText()), w, h);
 		tcpThread = new Thread(tcp);
 		tcpThread.start();
 		udp = new UDPClient(IPAddrField.getText(), Integer.parseInt(PortField.getText()));
+		System.out.println("UDP version: " + udp.counter);
 		udpThread = new Thread(udp);
 		udpThread.start();
 		dsp = new Display(tcp, udp);
@@ -211,9 +214,11 @@ public class ClientWindowMain extends JFrame implements Runnable {
 				frame.setSize(w*2, h*2);
 				frame.setTitle("Graphs");
 				int[] signal = udp.getSignal();
+				System.out.print("Display: ");
 				for (int i = 0; i < signal.length; i++) {
 					System.out.print(signal[i] + " ");
 				}
+				System.out.println();
 				frame.getContentPane().add(new Graph(signal));
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);

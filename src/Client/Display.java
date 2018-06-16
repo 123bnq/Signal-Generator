@@ -112,10 +112,12 @@ public class Display extends javax.swing.JFrame {
 		SineFreqLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SineFreqLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		SineFreqLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		SineFreqLabel.setText(String.valueOf(SineFreq.getValue()));
 
 		SineAmpLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SineAmpLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		SineAmpLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		SineAmpLabel.setText(String.valueOf(SineAmp.getValue()));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
@@ -189,6 +191,7 @@ public class Display extends javax.swing.JFrame {
 		SquareDutyLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SquareDutyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		SquareDutyLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		SquareDutyLabel.setText(String.valueOf(SquareDuty.getValue()));
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2Layout.setHorizontalGroup(
@@ -253,6 +256,8 @@ public class Display extends javax.swing.JFrame {
 		SawtoothFreqLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SawtoothFreqLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		SawtoothFreqLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		SawtoothFreqLabel.setText(String.valueOf(SawtoothFreq.getValue()));
+		
 
 		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
 		jPanel3Layout.setHorizontalGroup(
@@ -308,16 +313,16 @@ public class Display extends javax.swing.JFrame {
 		tcp.setSawtoothFreq(SawtoothFreq.getValue());
 		tcp.setSendSawtooth(true);
 		// JFrame frame = new JFrame();
-		if (frame != null) {
-			frame.dispose();
-			frame = null;
-			System.out.println("Frame is null: " + (frame == null));
-		}
-		if (frame == null) {
-			frame = new JFrame();
-		}
-		frame.setSize(776, 471);
-		frame.setTitle("Graphs");
+//		if (frame != null) {
+//			frame.dispose();
+//			frame = null;
+//			System.out.println("Frame is null: " + (frame == null));
+//		}
+//		if (frame == null) {
+//			frame = new JFrame();
+//		}
+//		frame.setSize(776, 471);
+//		frame.setTitle("Graphs");
 		// frame.setLocationRelativeTo(null);
 		// Sawtooth_gen draw = new Sawtooth_gen();
 		// frame.getContentPane().add(draw);
@@ -330,17 +335,17 @@ public class Display extends javax.swing.JFrame {
 		tcp.setSineFreq(SineFreq.getValue());
 		tcp.setSendSine(true);
 		// JFrame frame = new JFrame();
-
-		if (frame != null) {
-			frame.dispose();
-			frame = null;
-			System.out.println("Frame is null: " + (frame == null));
-		}
-		if (frame == null) {
-			frame = new JFrame();
-		}
-		frame.setSize(776, 471);
-		frame.setTitle("Graphs");
+//
+//		if (frame != null) {
+//			frame.dispose();
+//			frame = null;
+//			System.out.println("Frame is null: " + (frame == null));
+//		}
+//		if (frame == null) {
+//			frame = new JFrame();
+//		}
+//		frame.setSize(776, 471);
+//		frame.setTitle("Graphs");
 		//// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.setLocationRelativeTo(null);
 		// Sine_gen draw = new Sine_gen();
@@ -353,16 +358,16 @@ public class Display extends javax.swing.JFrame {
 		tcp.setSquarePWM(SquareDuty.getValue());
 		tcp.setSendSquare(true);
 		// JFrame frame = new JFrame();
-		if (frame != null) {
-			frame.dispose();
-			frame = null;
-			System.out.println("Frame is null: " + (frame == null));
-		}
-		if (frame == null) {
-			frame = new JFrame();
-		}
-		frame.setSize(776, 471);
-		frame.setTitle("Graphs");
+//		if (frame != null) {
+//			frame.dispose();
+//			frame = null;
+//			System.out.println("Frame is null: " + (frame == null));
+//		}
+//		if (frame == null) {
+//			frame = new JFrame();
+//		}
+//		frame.setSize(776, 471);
+//		frame.setTitle("Graphs");
 		//// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.setLocationRelativeTo(null);
 		// Square_gen draw = new Square_gen();

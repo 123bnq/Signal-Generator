@@ -105,6 +105,9 @@ public class TCPServer implements Runnable {
 						// set flag for UDP to send the signal
 						finished = true;
 						break;
+					case "bye":
+						Connected = false;
+						break;
 					default:
 						break;
 					}					

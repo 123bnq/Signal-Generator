@@ -19,6 +19,8 @@ public class UDPClient implements Runnable {
 	private byte[] sendData = new byte[2000];
 	private boolean received = false;
 	
+	public static int counter = 0;
+	
 	private int[] signal;
 
 	public int[] getSignal() {
@@ -31,6 +33,7 @@ public class UDPClient implements Runnable {
 	public UDPClient(String IPaddr, int port) {
 		this.IPaddr = IPaddr;
 		this.port = port;
+		counter++;
 	}
 
 	@Override
@@ -52,7 +55,13 @@ public class UDPClient implements Runnable {
 			while (true) {
 				socket.receive(receivePacket);
 				received = true;
+				System.out.println(received == true);
 				signal = Converter.convert(receivePacket);
+				System.out.print("UDP client: ");
+				for (int i = 0; i < signal.length; i++) {
+					System.out.print(signal[i] + " ");
+				}
+				System.out.println();
 				System.out.println(receivePacket.getLength());
 				System.out.println(signal.length);
 				// receivedString = new String(receivePacket.getData(),
@@ -78,8 +87,7 @@ public class UDPClient implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Close UDP connection");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -80,6 +80,7 @@ public class TCPClient implements Runnable {
 
 	public void closeConnection() {
 		try {
+			pw.println("bye");
 			pw.close();
 			bf.close();
 			socket.close();

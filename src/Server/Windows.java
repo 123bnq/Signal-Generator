@@ -173,8 +173,8 @@ public class Windows implements Runnable {
 				udpserver.shutdownServer();
 				btnStopServer.setEnabled(false);
 				t.stop();
-//				tcpthread.stop();
-//				udpthread.stop();
+				tcpthread.stop();
+				udpthread.stop();
 			}
 		});
 		btnStopServer.setBounds(230, 156, 105, 23);
@@ -220,6 +220,9 @@ public class Windows implements Runnable {
 					} else {
 //						System.out.println("not finished");
 					}
+				}
+				else {
+					udpserver.setConnected(false);
 				}
 			}
 		}
