@@ -9,16 +9,21 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import Server.Converter;
+
 public class UDPClient implements Runnable {
 	private DatagramSocket socket;
 	private String IPaddr;
 	private int port;
-	private byte[] receiveData = new byte[1024];
-	private byte[] sendData = new byte[1024];
+	private byte[] receiveData = new byte[2000];
+	private byte[] sendData = new byte[2000];
 	private boolean received = false;
-	private String receivedString;
-
+	
 	private int[] signal;
+
+	public int[] getSignal() {
+		return signal;
+	}
 
 	private ByteArrayInputStream bis;
 	private DataInputStream dis;
@@ -47,27 +52,9 @@ public class UDPClient implements Runnable {
 			while (true) {
 				socket.receive(receivePacket);
 				received = true;
-				byte[] receiveBytes = receivePacket.getData();
+				signal = Converter.convert(receivePacket);
 				System.out.println(receivePacket.getLength());
-				int signalLength = receivePacket.getLength() >> 2;
-				signal = new int[signalLength];
-				for (int i = 0; i < signalLength; i++) {
-					int j = i << 2;
-					int x = 0;
-					x += (receiveBytes[j++] & 0xff) << 0;
-					x += (receiveBytes[j++] & 0xff) << 8;
-					x += (receiveBytes[j++] & 0xff) << 16;
-					x += (receiveBytes[j++] & 0xff) << 24;
-					signal[i] = x;
-				}
 				System.out.println(signal.length);
-				// bis = new ByteArrayInputStream(receivePacket.getData());
-				// dis = new DataInputStream(bis);
-				// for (int i = 0; i < receiveData.length; i++) {
-				// dis.readInt();
-				// }
-				// dis.close();
-
 				// receivedString = new String(receivePacket.getData(),
 				// receivePacket.getOffset(), receivePacket.getLength());
 				// switch (receivedString) {
@@ -81,7 +68,7 @@ public class UDPClient implements Runnable {
 				// break;
 				// }
 				try {
-					Thread.sleep(10);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -13,9 +13,9 @@ public class TCPClient implements Runnable {
 	private Socket socket;
 	private PrintWriter pw;
 	private BufferedReader bf;
-	private String IPaddr = "localhost";
+	private String IPaddr;
 	private int port;
-	private boolean sendSine =false;
+	private boolean sendSine = false;
 	private boolean sendSquare = false;
 	private boolean sendSawtooth = false;
 	private boolean TCPsent = false;
@@ -24,9 +24,13 @@ public class TCPClient implements Runnable {
 	private int SquarePWM;
 	private int SawtoothFreq;
 
-	public TCPClient(String IPaddr, int port) {
+	private int w, h;
+
+	public TCPClient(String IPaddr, int port, int w, int h) {
 		this.IPaddr = IPaddr;
 		this.port = port;
+		this.w = w;
+		this.h = h;
 	}
 
 	@Override
@@ -37,6 +41,8 @@ public class TCPClient implements Runnable {
 			bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 			System.out.println(bf.readLine());
 			pw.println("1");
+			pw.println(String.valueOf(w));
+			pw.println(String.valueOf(h));
 			while (true) {
 				if (sendSine || sendSquare || sendSawtooth) {
 					TCPsent = true;
@@ -114,7 +120,7 @@ public class TCPClient implements Runnable {
 	public boolean isTCPsent() {
 		return TCPsent;
 	}
-	
+
 	public void setTCPsent(boolean TCPsent) {
 		this.TCPsent = TCPsent;
 	}

@@ -2,6 +2,9 @@ package Client;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 //import Sawtooth_gen;
 //import Sine_gen;
@@ -48,8 +51,10 @@ public class Display extends javax.swing.JFrame {
 		jPanel1 = new javax.swing.JPanel();
 		Sine_Btn = new javax.swing.JButton();
 		SineFreq = new javax.swing.JSlider();
+		SineFreq.setMinimum(1);
 		jLabel1 = new javax.swing.JLabel();
 		SineAmp = new javax.swing.JSlider();
+		SineAmp.setMinimum(1);
 		jLabel2 = new javax.swing.JLabel();
 		SineFreqLabel = new javax.swing.JLabel();
 		SineAmpLabel = new javax.swing.JLabel();
@@ -61,6 +66,7 @@ public class Display extends javax.swing.JFrame {
 		jPanel3 = new javax.swing.JPanel();
 		Sawtooth_Btn = new javax.swing.JButton();
 		SawtoothFreq = new javax.swing.JSlider();
+		SawtoothFreq.setMinimum(1);
 		jLabel7 = new javax.swing.JLabel();
 		SawtoothFreqLabel = new javax.swing.JLabel();
 
@@ -75,7 +81,7 @@ public class Display extends javax.swing.JFrame {
 			}
 		});
 
-		SineFreq.setMajorTickSpacing(100);
+		SineFreq.setMajorTickSpacing(99);
 		SineFreq.setMinorTickSpacing(10);
 		SineFreq.setPaintLabels(true);
 		SineFreq.setPaintTicks(true);
@@ -87,9 +93,9 @@ public class Display extends javax.swing.JFrame {
 		});
 
 		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		jLabel1.setText("FREQUENCY (Hz)");
+		jLabel1.setText("Frequency (Hz)");
 
-		SineAmp.setMajorTickSpacing(100);
+		SineAmp.setMajorTickSpacing(99);
 		SineAmp.setMinorTickSpacing(10);
 		SineAmp.setPaintLabels(true);
 		SineAmp.setPaintTicks(true);
@@ -101,16 +107,14 @@ public class Display extends javax.swing.JFrame {
 		});
 
 		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		jLabel2.setText("AMPLITUDE");
+		jLabel2.setText("Amplitude");
 
 		SineFreqLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SineFreqLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		SineFreqLabel.setText("0");
 		SineFreqLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		SineAmpLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SineAmpLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		SineAmpLabel.setText("0");
 		SineAmpLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -184,39 +188,43 @@ public class Display extends javax.swing.JFrame {
 
 		SquareDutyLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SquareDutyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		SquareDutyLabel.setText("0");
 		SquareDutyLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-		jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		jPanel2Layout.setHorizontalGroup(
+			jPanel2Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
-										.addComponent(SquareDuty, javax.swing.GroupLayout.DEFAULT_SIZE,
-												283, Short.MAX_VALUE)
-										.addGap(18, 18, 18).addComponent(SquareDutyLabel,
-												javax.swing.GroupLayout.PREFERRED_SIZE, 78,
-												javax.swing.GroupLayout.PREFERRED_SIZE))
+					.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(jPanel2Layout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(SquareDuty, GroupLayout.PREFERRED_SIZE, 283, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+							.addComponent(SquareDutyLabel, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel2Layout.createSequentialGroup()
+							.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
 								.addGroup(jPanel2Layout.createSequentialGroup()
-										.addGroup(jPanel2Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(jPanel2Layout.createSequentialGroup().addGap(158, 158, 158)
-														.addComponent(Square_Btn))
-												.addGroup(jPanel2Layout.createSequentialGroup().addGap(79, 79, 79)
-														.addComponent(jLabel5)))
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addContainerGap()));
-		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-						.addContainerGap(93, Short.MAX_VALUE).addComponent(jLabel5)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(SquareDutyLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(SquareDuty, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGap(110, 110, 110).addComponent(Square_Btn).addContainerGap()));
+									.addGap(158)
+									.addComponent(Square_Btn))
+								.addGroup(jPanel2Layout.createSequentialGroup()
+									.addGap(79)
+									.addComponent(jLabel5)))
+							.addGap(0, 171, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		jPanel2Layout.setVerticalGroup(
+			jPanel2Layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+					.addGap(93)
+					.addComponent(jLabel5)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(SquareDutyLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(SquareDuty, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+					.addComponent(Square_Btn)
+					.addContainerGap())
+		);
+		jPanel2.setLayout(jPanel2Layout);
 
 		jTabbedPane1.addTab("Square", jPanel2);
 
@@ -227,7 +235,7 @@ public class Display extends javax.swing.JFrame {
 			}
 		});
 
-		SawtoothFreq.setMajorTickSpacing(100);
+		SawtoothFreq.setMajorTickSpacing(99);
 		SawtoothFreq.setMinorTickSpacing(10);
 		SawtoothFreq.setPaintLabels(true);
 		SawtoothFreq.setPaintTicks(true);
@@ -244,33 +252,41 @@ public class Display extends javax.swing.JFrame {
 
 		SawtoothFreqLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		SawtoothFreqLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		SawtoothFreqLabel.setText("0");
 		SawtoothFreqLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-		jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		jPanel3Layout.setHorizontalGroup(
+			jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup()
-						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
-										.addComponent(SawtoothFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 283,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(18, 18, 18).addComponent(SawtoothFreqLabel,
-												javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-								.addGroup(jPanel3Layout.createSequentialGroup().addGap(95, 95, 95).addComponent(jLabel7)
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addContainerGap())
-				.addGroup(jPanel3Layout.createSequentialGroup().addGap(163, 163, 163).addComponent(Sawtooth_Btn)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-						.addContainerGap(89, Short.MAX_VALUE).addComponent(jLabel7).addGap(18, 18, 18)
-						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(SawtoothFreqLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(SawtoothFreq, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGap(107, 107, 107).addComponent(Sawtooth_Btn).addContainerGap()));
+					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(jPanel3Layout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(SawtoothFreq, GroupLayout.PREFERRED_SIZE, 283, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(SawtoothFreqLabel, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+						.addGroup(jPanel3Layout.createSequentialGroup()
+							.addGap(95)
+							.addComponent(jLabel7)
+							.addGap(0, 155, Short.MAX_VALUE))
+						.addGroup(jPanel3Layout.createSequentialGroup()
+							.addGap(163)
+							.addComponent(Sawtooth_Btn)))
+					.addContainerGap())
+		);
+		jPanel3Layout.setVerticalGroup(
+			jPanel3Layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(jPanel3Layout.createSequentialGroup()
+					.addGap(89)
+					.addComponent(jLabel7)
+					.addGap(18)
+					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(SawtoothFreqLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(SawtoothFreq, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+					.addComponent(Sawtooth_Btn)
+					.addContainerGap())
+		);
+		jPanel3.setLayout(jPanel3Layout);
 
 		jTabbedPane1.addTab("Sawtooth", jPanel3);
 
@@ -295,7 +311,7 @@ public class Display extends javax.swing.JFrame {
 		if (frame != null) {
 			frame.dispose();
 			frame = null;
-			System.out.println(frame == null);
+			System.out.println("Frame is null: " + (frame == null));
 		}
 		if (frame == null) {
 			frame = new JFrame();
@@ -318,7 +334,7 @@ public class Display extends javax.swing.JFrame {
 		if (frame != null) {
 			frame.dispose();
 			frame = null;
-			System.out.println(frame == null);
+			System.out.println("Frame is null: " + (frame == null));
 		}
 		if (frame == null) {
 			frame = new JFrame();
@@ -340,7 +356,7 @@ public class Display extends javax.swing.JFrame {
 		if (frame != null) {
 			frame.dispose();
 			frame = null;
-			System.out.println(frame == null);
+			System.out.println("Frame is null: " + (frame == null));
 		}
 		if (frame == null) {
 			frame = new JFrame();

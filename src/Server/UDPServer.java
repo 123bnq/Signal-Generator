@@ -9,9 +9,10 @@ import java.net.InetAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 
+
 public class UDPServer implements Runnable {
 	private DatagramSocket socket;
-	private byte[] buffer = new byte[1024];
+	private byte[] buffer = new byte[2000];
 	private int port;
 	private SocketAddress sokeaddr;
 
@@ -55,11 +56,12 @@ public class UDPServer implements Runnable {
 					if (finished) {
 						System.out.println("udpserver receives signal");
 						finished = false;
-						for (int i = 0; i < signal.length; i++) {
-							dos.writeInt(signal[i]);
-						}
-						dos.close();
-						buffer = bos.toByteArray();
+//						for (int i = 0; i < signal.length; i++) {
+//							dos.writeInt(signal[i]);
+//						}
+//						dos.close();
+//						buffer = bos.toByteArray();
+						buffer = Converter.convert(signal);
 						signalPacket = new DatagramPacket(buffer, buffer.length, address, port);
 						socket.send(signalPacket);
 					}

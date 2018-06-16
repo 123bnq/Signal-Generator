@@ -22,7 +22,7 @@ public class SawtoothGen extends SignalGen {
 						* Math.sin(2 * Math.PI * (double) j * (freq * (double) x / (double) SamplingRate));
 				y = y + sin;
 			}
-			signal[x] = h - (int) y;
+			signal[x] = (int) y;
 		}
 	}
 

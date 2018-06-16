@@ -18,7 +18,7 @@ public class SineGen extends SignalGen {
 		double y;
 		for (int x = 0; x < w; x++) {
 			y = amp * Math.sin(Math.PI * (float) (2 * freq * x / (double)SamplingRate));
-			signal[x] = h - (int) y;
+			signal[x] = (int) y;
 		}
 	}
 }

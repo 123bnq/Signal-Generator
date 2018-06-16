@@ -26,7 +26,7 @@ public class SquareGen extends SignalGen {
 				y += 2.0 / ((double) j * Math.PI) * sin * cos;
 			}
 			y = y * amp;
-			signal[i] = h - (int) y;
+			signal[i] = (int) y;
 		}
 	}
 }
