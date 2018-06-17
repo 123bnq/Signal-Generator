@@ -27,15 +27,10 @@ public class TCPClient implements Runnable {
 	private int SawtoothFreq;
 	private JFrame frame;
 
-//	private int w, h, border;
-
 	public TCPClient(String IPaddr, int port, JFrame frame) {
 		this.IPaddr = IPaddr;
 		this.port = port;
 		this.frame = frame;
-//		this.w = w;
-//		this.h = h;
-//		this.border = border;
 	}
 
 	@Override
@@ -46,9 +41,6 @@ public class TCPClient implements Runnable {
 			bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 			System.out.println(bf.readLine());
 			pw.println("1");
-//			pw.println(String.valueOf(w));
-//			pw.println(String.valueOf(h));
-//			pw.println(String.valueOf(border));
 			while (true) {
 				if (sendSine || sendSquare || sendSawtooth) {
 					TCPsent = true;

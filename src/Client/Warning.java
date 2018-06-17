@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 
 public class Warning extends JDialog {

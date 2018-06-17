@@ -36,7 +36,6 @@ public class TCPServer implements Runnable {
 	private boolean finished = false;
 	private boolean Connected = false;
 	
-//	private int w, h, border;
 	private int numberOfSample = 800;
 
 
@@ -62,9 +61,6 @@ public class TCPServer implements Runnable {
 				pw.println("Hello World");
 				while (!bf.readLine().equals("1"));
 				System.out.println("Client is connected");
-//				w = Integer.parseInt(bf.readLine());
-//				h = Integer.parseInt(bf.readLine());
-//				border = Integer.parseInt(bf.readLine());
 				Connected = true;
 				while ((mode = bf.readLine()) != null) {
 					switch (mode) {

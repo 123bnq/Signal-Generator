@@ -60,7 +60,6 @@ public class Windows implements Runnable {
 				}
 			}
 		});
-		// EventQueue.invokeLater(win);
 	}
 
 	/**
@@ -139,14 +138,6 @@ public class Windows implements Runnable {
 						System.out.println(addr + validateIPAddress(addr));
 						boolean isLocalhost = addr.equals("localhost");
 						if ((isLocalhost | validateIPAddress(addr)) && isPort) {
-							// tcpserver = new TCPServer(addr, port);
-							// System.out.println(tcpserver == null);
-							// tcpthread = new Thread(tcpserver);
-							// tcpthread.start();
-							// udpserver = new
-							// UDPServer(Integer.parseInt(Port.getText()));
-							// udpthread = new Thread(udpserver);
-							// udpthread.start();
 							IPAddr.setEditable(false);
 							Port.setEditable(false);
 							btnStopServer.setEnabled(true);
@@ -233,8 +224,6 @@ public class Windows implements Runnable {
 						udpserver.setFinished(tcpserver.isFinished());
 						tcpserver.setFinished(false);
 						System.out.println("finished");
-					} else {
-//						System.out.println("not finished");
 					}
 				}
 				else {

@@ -1,14 +1,9 @@
 package Client;
 
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-//import Sawtooth_gen;
-//import Sine_gen;
-//import Square_gen;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -74,10 +69,6 @@ public class Display extends javax.swing.JFrame {
 		SawtoothFreq.setMinimum(1);
 		jLabel7 = new javax.swing.JLabel();
 		SawtoothFreqLabel = new javax.swing.JLabel();
-
-//		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-//		jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
 		Sine_Btn.setText("Apply");
 		Sine_Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -315,67 +306,17 @@ public class Display extends javax.swing.JFrame {
 	private void Sawtooth_BtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Sawtooth_BtnActionPerformed
 		tcp.setSawtoothFreq(SawtoothFreq.getValue());
 		tcp.setSendSawtooth(true);
-		// JFrame frame = new JFrame();
-//		if (frame != null) {
-//			frame.dispose();
-//			frame = null;
-//			System.out.println("Frame is null: " + (frame == null));
-//		}
-//		if (frame == null) {
-//			frame = new JFrame();
-//		}
-//		frame.setSize(776, 471);
-//		frame.setTitle("Graphs");
-		// frame.setLocationRelativeTo(null);
-		// Sawtooth_gen draw = new Sawtooth_gen();
-		// frame.getContentPane().add(draw);
-		// frame.setVisible(true);
-
 	}// GEN-LAST:event_Sawtooth_BtnActionPerformed
 
 	private void Sine_BtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Sine_BtnActionPerformed
 		tcp.setSineAmp(SineAmp.getValue());
 		tcp.setSineFreq(SineFreq.getValue());
 		tcp.setSendSine(true);
-		// JFrame frame = new JFrame();
-//
-//		if (frame != null) {
-//			frame.dispose();
-//			frame = null;
-//			System.out.println("Frame is null: " + (frame == null));
-//		}
-//		if (frame == null) {
-//			frame = new JFrame();
-//		}
-//		frame.setSize(776, 471);
-//		frame.setTitle("Graphs");
-		//// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.setLocationRelativeTo(null);
-		// Sine_gen draw = new Sine_gen();
-		// frame.getContentPane().add(draw);
-		// frame.setVisible(true);
-
 	}// GEN-LAST:event_Sine_BtnActionPerformed
 
 	private void Square_BtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Square_BtnActionPerformed
 		tcp.setSquarePWM(SquareDuty.getValue());
 		tcp.setSendSquare(true);
-		// JFrame frame = new JFrame();
-//		if (frame != null) {
-//			frame.dispose();
-//			frame = null;
-//			System.out.println("Frame is null: " + (frame == null));
-//		}
-//		if (frame == null) {
-//			frame = new JFrame();
-//		}
-//		frame.setSize(776, 471);
-//		frame.setTitle("Graphs");
-		//// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.setLocationRelativeTo(null);
-		// Square_gen draw = new Square_gen();
-		// frame.getContentPane().add(draw);
-		// frame.setVisible(true);
 	}// GEN-LAST:event_Square_BtnActionPerformed
 
 	private void SineFreqStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_SineFreqStateChanged
@@ -397,53 +338,6 @@ public class Display extends javax.swing.JFrame {
 		// TODO add your handling code here:
 		SawtoothFreqLabel.setText(Integer.toString(SawtoothFreq.getValue()));
 	}// GEN-LAST:event_SawtoothFreqStateChanged
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	// public static void main(String args[]) {
-	// /* Set the Nimbus look and feel */
-	// //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-	// (optional) ">
-	// /* If Nimbus (introduced in Java SE 6) is not available, stay with the
-	// default look and feel.
-	// * For details see
-	// http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-	// */
-	// try {
-	// for (javax.swing.UIManager.LookAndFeelInfo info :
-	// javax.swing.UIManager.getInstalledLookAndFeels()) {
-	// if ("Windows".equals(info.getName())) {
-	// javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	// break;
-	// }
-	// }
-	// } catch (ClassNotFoundException ex) {
-	// java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE,
-	// null, ex);
-	// } catch (InstantiationException ex) {
-	// java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE,
-	// null, ex);
-	// } catch (IllegalAccessException ex) {
-	// java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE,
-	// null, ex);
-	// } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-	// java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE,
-	// null, ex);
-	// }
-	// //</editor-fold>
-	//
-	// /* Create and display the form */
-	// java.awt.EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// new Display().setVisible(true);
-	// }
-	// });
-	//
-	//
-	//
-	// }
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JSlider SawtoothFreq;

@@ -21,11 +21,6 @@ public class Warning extends JDialog {
 
 	public Warning(JFrame frame, String warning) {
 		setTitle("Warning");
-//		try {
-//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
 		
 		setBounds(100, 100, 450, 138);
 		getContentPane().setLayout(new BorderLayout());

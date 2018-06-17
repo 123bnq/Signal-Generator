@@ -103,10 +103,8 @@ public class ClientWindowMain extends JFrame implements Runnable, ActionListener
 				if ((key >= e.VK_0 && key <= e.VK_9) || (key >= e.VK_NUMPAD0 && key <= e.VK_NUMPAD9)
 						|| key == e.VK_BACK_SPACE) {
 					PortField.setEditable(true);
-					// WarningPort.setText("");
 				} else {
 					PortField.setEditable(false);
-					// WarningPort.setText("Only number is accepted");
 				}
 			}
 		});
@@ -116,45 +114,6 @@ public class ClientWindowMain extends JFrame implements Runnable, ActionListener
 
 		btnConnect = new JButton("Connect");
 		btnConnect.addActionListener(this);
-		// btnConnect.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// if (!IPAddrField.getText().equals("") &&
-		// !PortField.getText().equals("")) {
-		// String IPaddr = IPAddrField.getText();
-		// int port = Integer.parseInt(PortField.getText());
-		// boolean isPort;
-		// if (port >= 0 && port < 65536) {
-		// isPort = true;
-		// } else
-		// isPort = false;
-		// boolean isLocalhost = IPaddr.equals("localhost");
-		// if ((isLocalhost | validateIPAddress(IPaddr)) && isPort) {
-		// // tcp = new TCPClient(IPaddr, port);
-		// // tcpThread = new Thread(tcp);
-		// // tcpThread.start();
-		// // udp = new UDPClient(IPaddr, port);
-		// // udpThread = new Thread(udp);
-		// // udpThread.start();
-		// // dsp = new Display(tcp, udp);
-		// cl = new ClientWindowMain();
-		// t = new Thread(cl);
-		// t.start();
-		// IPAddrField.setEditable(false);
-		// PortField.setEditable(false);
-		// btnDisconnect.setEnabled(true);
-		// btnConnect.setEnabled(false);
-		// } else {
-		// IPAddrField.setText("");
-		// IPAddrField.setEditable(true);
-		// PortField.setText("");
-		// PortField.setEditable(true);
-		// }
-		// }
-		// else {
-		// Warning warn = new Warning();
-		// }
-		// }
-		// });
 		btnConnect.setBounds(99, 199, 89, 23);
 		contentPane.add(btnConnect);
 
@@ -165,7 +124,6 @@ public class ClientWindowMain extends JFrame implements Runnable, ActionListener
 				IPAddrField.setEditable(true);
 				PortField.setEditable(true);
 				tcp.closeConnection();
-				// udp.closeConnection();
 				btnDisconnect.setEnabled(false);
 				dsp.setVisible(false);
 				if (frame != null) {
@@ -242,11 +200,6 @@ public class ClientWindowMain extends JFrame implements Runnable, ActionListener
 		PortField.setEditable(true);
 	}
 
-	private void resetButtonStates() {
-		btnConnect.setEnabled(true);
-		btnDisconnect.setEnabled(false);
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnConnect) {
@@ -263,13 +216,6 @@ public class ClientWindowMain extends JFrame implements Runnable, ActionListener
 					}
 					boolean isLocalhost = IPaddr.equals("localhost");
 					if ((isLocalhost | validateIPAddress(IPaddr)) && isPort) {
-						// tcp = new TCPClient(IPaddr, port);
-						// tcpThread = new Thread(tcp);
-						// tcpThread.start();
-						// udp = new UDPClient(IPaddr, port);
-						// udpThread = new Thread(udp);
-						// udpThread.start();
-						// dsp = new Display(tcp, udp);
 						cl = new ClientWindowMain();
 						t = new Thread(cl);
 						t.start();
