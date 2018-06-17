@@ -5,18 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 
-import Client.Warning;
-
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.time.chrono.IsoChronology;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
