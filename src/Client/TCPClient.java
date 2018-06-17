@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
+import javax.swing.JFrame;
+
 public class TCPClient implements Runnable {
 	private Socket socket;
 	private PrintWriter pw;
@@ -23,14 +25,17 @@ public class TCPClient implements Runnable {
 	private int SineAmp;
 	private int SquarePWM;
 	private int SawtoothFreq;
+	private JFrame frame;
 
-	private int w, h;
+//	private int w, h, border;
 
-	public TCPClient(String IPaddr, int port, int w, int h) {
+	public TCPClient(String IPaddr, int port, JFrame frame) {
 		this.IPaddr = IPaddr;
 		this.port = port;
-		this.w = w;
-		this.h = h;
+		this.frame = frame;
+//		this.w = w;
+//		this.h = h;
+//		this.border = border;
 	}
 
 	@Override
@@ -41,8 +46,9 @@ public class TCPClient implements Runnable {
 			bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 			System.out.println(bf.readLine());
 			pw.println("1");
-			pw.println(String.valueOf(w));
-			pw.println(String.valueOf(h));
+//			pw.println(String.valueOf(w));
+//			pw.println(String.valueOf(h));
+//			pw.println(String.valueOf(border));
 			while (true) {
 				if (sendSine || sendSquare || sendSawtooth) {
 					TCPsent = true;
@@ -71,10 +77,12 @@ public class TCPClient implements Runnable {
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			Warning warn = new Warning(frame, "Server is not detected. Please turn on server and reopen the program!");
 		}
 	}
 

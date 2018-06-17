@@ -1,28 +1,22 @@
 package Server;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketAddress;
 import java.net.SocketException;
 
 
 public class UDPServer implements Runnable {
 	private DatagramSocket socket;
-	private byte[] buffer = new byte[2000];
+	private byte[] buffer = new byte[800*4];
 	private int port;
-	private SocketAddress sokeaddr;
 
 	private int[] signal;
 	private String signalName;
 	DatagramPacket signalPacket;
 	private boolean finished;
 
-	private ByteArrayOutputStream bos = new ByteArrayOutputStream();
-    private DataOutputStream dos = new DataOutputStream(bos);
 	private boolean Connected;
 
 	public UDPServer(int port) {
@@ -58,16 +52,10 @@ public class UDPServer implements Runnable {
 					if (finished) {
 						System.out.println("udpserver receives signal");
 						finished = false;
-//						for (int i = 0; i < signal.length; i++) {
-//							dos.writeInt(signal[i]);
-//						}
-//						dos.close();
-//						buffer = bos.toByteArray();
 						buffer = Converter.convert(signal);
 						signalPacket = new DatagramPacket(buffer, buffer.length, address, port);
 						socket.send(signalPacket);
 					}
-
 				}
 			}
 		} catch (SocketException e1) {

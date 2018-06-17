@@ -5,13 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Server.Graph;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
-import javax.sound.sampled.Port;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -20,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
-public class ClientWindowMain extends JFrame implements Runnable {
+public class ClientWindowMain extends JFrame implements Runnable, ActionListener {
 
 	private JPanel contentPane;
 	private JTextField IPAddrField;
@@ -43,8 +39,9 @@ public class ClientWindowMain extends JFrame implements Runnable {
 	Thread t;
 
 	private static JFrame frame;
-	private int w = 400;
-	private int h = 300;
+	private int w = 900;
+	private int h = 600;
+	private int border = 30;
 
 	/**
 	 * Launch the application.
@@ -59,6 +56,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 			public void run() {
 				try {
 					ClientWindowMain frame = new ClientWindowMain();
+					frame.setLocation(900, 100);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,6 +69,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 	 * Create the frame.
 	 */
 	public ClientWindowMain() {
+		setResizable(false);
 		setTitle("Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -116,39 +115,46 @@ public class ClientWindowMain extends JFrame implements Runnable {
 		PortField.setColumns(10);
 
 		btnConnect = new JButton("Connect");
-		btnConnect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String IPaddr = IPAddrField.getText();
-				int port = Integer.parseInt(PortField.getText());
-				boolean isPort;
-				if (port >= 0 && port < 65536) {
-					isPort = true;
-				} else
-					isPort = false;
-				boolean isLocalhost = IPaddr.equals("localhost");
-				if ((isLocalhost | validateIPAddress(IPaddr)) && isPort) {
-					// tcp = new TCPClient(IPaddr, port);
-					// tcpThread = new Thread(tcp);
-					// tcpThread.start();
-					// udp = new UDPClient(IPaddr, port);
-					// udpThread = new Thread(udp);
-					// udpThread.start();
-					// dsp = new Display(tcp, udp);
-					cl = new ClientWindowMain();
-					t = new Thread(cl);
-					t.start();
-					IPAddrField.setEditable(false);
-					PortField.setEditable(false);
-					btnDisconnect.setEnabled(true);
-					btnConnect.setEnabled(false);
-				} else {
-					IPAddrField.setText("");
-					IPAddrField.setEditable(true);
-					PortField.setText("");
-					PortField.setEditable(true);
-				}
-			}
-		});
+		btnConnect.addActionListener(this);
+		// btnConnect.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// if (!IPAddrField.getText().equals("") &&
+		// !PortField.getText().equals("")) {
+		// String IPaddr = IPAddrField.getText();
+		// int port = Integer.parseInt(PortField.getText());
+		// boolean isPort;
+		// if (port >= 0 && port < 65536) {
+		// isPort = true;
+		// } else
+		// isPort = false;
+		// boolean isLocalhost = IPaddr.equals("localhost");
+		// if ((isLocalhost | validateIPAddress(IPaddr)) && isPort) {
+		// // tcp = new TCPClient(IPaddr, port);
+		// // tcpThread = new Thread(tcp);
+		// // tcpThread.start();
+		// // udp = new UDPClient(IPaddr, port);
+		// // udpThread = new Thread(udp);
+		// // udpThread.start();
+		// // dsp = new Display(tcp, udp);
+		// cl = new ClientWindowMain();
+		// t = new Thread(cl);
+		// t.start();
+		// IPAddrField.setEditable(false);
+		// PortField.setEditable(false);
+		// btnDisconnect.setEnabled(true);
+		// btnConnect.setEnabled(false);
+		// } else {
+		// IPAddrField.setText("");
+		// IPAddrField.setEditable(true);
+		// PortField.setText("");
+		// PortField.setEditable(true);
+		// }
+		// }
+		// else {
+		// Warning warn = new Warning();
+		// }
+		// }
+		// });
 		btnConnect.setBounds(99, 199, 89, 23);
 		contentPane.add(btnConnect);
 
@@ -159,7 +165,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 				IPAddrField.setEditable(true);
 				PortField.setEditable(true);
 				tcp.closeConnection();
-//				udp.closeConnection();
+				// udp.closeConnection();
 				btnDisconnect.setEnabled(false);
 				dsp.setVisible(false);
 				if (frame != null) {
@@ -187,7 +193,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Start Connection");
-		tcp = new TCPClient(IPAddrField.getText(), Integer.parseInt(PortField.getText()), w, h);
+		tcp = new TCPClient(IPAddrField.getText(), Integer.parseInt(PortField.getText()), this);
 		tcpThread = new Thread(tcp);
 		tcpThread.start();
 		udp = new UDPClient(IPAddrField.getText(), Integer.parseInt(PortField.getText()));
@@ -211,7 +217,7 @@ public class ClientWindowMain extends JFrame implements Runnable {
 				if (frame == null) {
 					frame = new JFrame();
 				}
-				frame.setSize(w*2, h*2);
+				frame.setSize(w, h);
 				frame.setTitle("Graphs");
 				int[] signal = udp.getSignal();
 				System.out.print("Display: ");
@@ -219,10 +225,69 @@ public class ClientWindowMain extends JFrame implements Runnable {
 					System.out.print(signal[i] + " ");
 				}
 				System.out.println();
-				frame.getContentPane().add(new Graph(signal));
-				frame.setLocationRelativeTo(null);
+				frame.getContentPane().add(new Graph(signal, border));
+				frame.setLocation(800, 400);
+				frame.setResizable(false);
+				frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				frame.setVisible(true);
 				udp.setReceived(false);
+			}
+		}
+	}
+
+	private void resetTextfields() {
+		IPAddrField.setText("");
+		IPAddrField.setEditable(true);
+		PortField.setText("");
+		PortField.setEditable(true);
+	}
+
+	private void resetButtonStates() {
+		btnConnect.setEnabled(true);
+		btnDisconnect.setEnabled(false);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnConnect) {
+			try {
+				if (!IPAddrField.getText().equals("") && !PortField.getText().equals("")) {
+					String IPaddr = IPAddrField.getText();
+					int port = Integer.parseInt(PortField.getText());
+					boolean isPort;
+					if (port >= 0 && port < 65536) {
+						isPort = true;
+					} else {
+						isPort = false;
+						Warning warn = new Warning(this, "The port number is not right!!!");
+					}
+					boolean isLocalhost = IPaddr.equals("localhost");
+					if ((isLocalhost | validateIPAddress(IPaddr)) && isPort) {
+						// tcp = new TCPClient(IPaddr, port);
+						// tcpThread = new Thread(tcp);
+						// tcpThread.start();
+						// udp = new UDPClient(IPaddr, port);
+						// udpThread = new Thread(udp);
+						// udpThread.start();
+						// dsp = new Display(tcp, udp);
+						cl = new ClientWindowMain();
+						t = new Thread(cl);
+						t.start();
+						IPAddrField.setEditable(false);
+						PortField.setEditable(false);
+						btnDisconnect.setEnabled(true);
+						btnConnect.setEnabled(false);
+					} else {
+						Warning warn = new Warning(this, "Wrong IP address!");
+						resetTextfields();
+					}
+				} else {
+					Warning warn = new Warning(this, "No inputs!");
+					resetTextfields();
+				}
+			} catch (NumberFormatException e1) {
+				Warning warn = new Warning(this, "The port number is not right!!!");
+				resetTextfields();
 			}
 		}
 	}

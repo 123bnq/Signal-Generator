@@ -1,4 +1,4 @@
-package Server;
+package Client;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -18,15 +18,14 @@ public class Warning extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JFrame frame;
 
-	public Warning(JFrame frame) {
+	public Warning(JFrame frame, String warning) {
+		setTitle("Warning");
 //		try {
 //			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 //		} catch (Throwable e) {
 //			e.printStackTrace();
 //		}
-		this.frame = frame;
 		
 		setBounds(100, 100, 450, 138);
 		getContentPane().setLayout(new BorderLayout());
@@ -34,7 +33,7 @@ public class Warning extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblNewLabel = new JLabel("No input");
+			JLabel lblNewLabel = new JLabel(warning);
 			lblNewLabel.setIcon(new ImageIcon(".\\graphics\\Error_48px.png"));
 			contentPanel.add(lblNewLabel);
 		}
@@ -56,7 +55,8 @@ public class Warning extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		setLocationRelativeTo(this.frame);
+		
+		setLocationRelativeTo(frame);
 		this.setModal(true);
 		this.setVisible(true);
 	}

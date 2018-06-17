@@ -31,6 +31,9 @@ public class Display extends javax.swing.JFrame {
 	JFrame frame;
 
 	public Display(TCPClient tcp, UDPClient udp) {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setLocation(100, 500);
+		setResizable(false);
 		initComponents();
 		this.tcp = tcp;
 		this.udp = udp;
@@ -51,10 +54,12 @@ public class Display extends javax.swing.JFrame {
 		jPanel1 = new javax.swing.JPanel();
 		Sine_Btn = new javax.swing.JButton();
 		SineFreq = new javax.swing.JSlider();
+		SineFreq.setMaximum(500);
 		SineFreq.setMinimum(1);
 		jLabel1 = new javax.swing.JLabel();
 		SineAmp = new javax.swing.JSlider();
 		SineAmp.setMinimum(1);
+		SineAmp.setMaximum(200);
 		jLabel2 = new javax.swing.JLabel();
 		SineFreqLabel = new javax.swing.JLabel();
 		SineAmpLabel = new javax.swing.JLabel();
@@ -72,7 +77,7 @@ public class Display extends javax.swing.JFrame {
 
 //		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+//		jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
 		Sine_Btn.setText("Apply");
 		Sine_Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +86,7 @@ public class Display extends javax.swing.JFrame {
 			}
 		});
 
-		SineFreq.setMajorTickSpacing(99);
+		SineFreq.setMajorTickSpacing(499);
 		SineFreq.setMinorTickSpacing(10);
 		SineFreq.setPaintLabels(true);
 		SineFreq.setPaintTicks(true);
@@ -95,7 +100,7 @@ public class Display extends javax.swing.JFrame {
 		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 		jLabel1.setText("Frequency (Hz)");
 
-		SineAmp.setMajorTickSpacing(99);
+		SineAmp.setMajorTickSpacing(199);
 		SineAmp.setMinorTickSpacing(10);
 		SineAmp.setPaintLabels(true);
 		SineAmp.setPaintTicks(true);
@@ -177,7 +182,6 @@ public class Display extends javax.swing.JFrame {
 		SquareDuty.setMinorTickSpacing(10);
 		SquareDuty.setPaintLabels(true);
 		SquareDuty.setPaintTicks(true);
-		SquareDuty.setSnapToTicks(true);
 		SquareDuty.setValue(0);
 		SquareDuty.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -242,7 +246,6 @@ public class Display extends javax.swing.JFrame {
 		SawtoothFreq.setMinorTickSpacing(10);
 		SawtoothFreq.setPaintLabels(true);
 		SawtoothFreq.setPaintTicks(true);
-		SawtoothFreq.setSnapToTicks(true);
 		SawtoothFreq.setValue(0);
 		SawtoothFreq.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {

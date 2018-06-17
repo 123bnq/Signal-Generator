@@ -1,7 +1,5 @@
 package Client;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -9,13 +7,11 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import Server.Converter;
-
 public class UDPClient implements Runnable {
 	private DatagramSocket socket;
 	private String IPaddr;
 	private int port;
-	private byte[] receiveData = new byte[2000];
+	private byte[] receiveData;
 	private byte[] sendData = new byte[2000];
 	private boolean received = false;
 	
@@ -27,13 +23,11 @@ public class UDPClient implements Runnable {
 		return signal;
 	}
 
-	private ByteArrayInputStream bis;
-	private DataInputStream dis;
-
 	public UDPClient(String IPaddr, int port) {
 		this.IPaddr = IPaddr;
 		this.port = port;
 		counter++;
+		this.receiveData = new byte[800*4];
 	}
 
 	@Override
@@ -64,18 +58,6 @@ public class UDPClient implements Runnable {
 				System.out.println();
 				System.out.println(receivePacket.getLength());
 				System.out.println(signal.length);
-				// receivedString = new String(receivePacket.getData(),
-				// receivePacket.getOffset(), receivePacket.getLength());
-				// switch (receivedString) {
-				// case "sine":
-				// break;
-				// case "rectangle":
-				// break;
-				// case "sawtooth":
-				// break;
-				// default:
-				// break;
-				// }
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {

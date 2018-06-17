@@ -36,7 +36,8 @@ public class TCPServer implements Runnable {
 	private boolean finished = false;
 	private boolean Connected = false;
 	
-	private int w, h;
+//	private int w, h, border;
+	private int numberOfSample = 800;
 
 
 	public TCPServer(String Saddr, int port) {
@@ -61,8 +62,9 @@ public class TCPServer implements Runnable {
 				pw.println("Hello World");
 				while (!bf.readLine().equals("1"));
 				System.out.println("Client is connected");
-				w = Integer.parseInt(bf.readLine());
-				h = Integer.parseInt(bf.readLine());
+//				w = Integer.parseInt(bf.readLine());
+//				h = Integer.parseInt(bf.readLine());
+//				border = Integer.parseInt(bf.readLine());
 				Connected = true;
 				while ((mode = bf.readLine()) != null) {
 					switch (mode) {
@@ -72,7 +74,7 @@ public class TCPServer implements Runnable {
 						System.out.println("sine: " + sineFreq + " " + sineAmp);
 						
 						// calculate the array signal
-						sine = new SineGen(w, h, sineFreq, sineAmp);
+						sine = new SineGen(numberOfSample, sineFreq, sineAmp);
 						sine.generate();
 						signal = sine.getSignal();
 						signalName = sine.getName();
@@ -84,7 +86,7 @@ public class TCPServer implements Runnable {
 						System.out.println("Square: " + squarePWM);
 						
 						// calculate the array signal
-						square = new SquareGen(w, h, squarePWM);
+						square = new SquareGen(numberOfSample, squarePWM);
 						square.generate(estimateInfinity, 100, normalAmplitude);
 						signal = square.getSignal();
 						signalName = square.getName();
@@ -97,8 +99,8 @@ public class TCPServer implements Runnable {
 						System.out.println("Sawtooth: " + sawtoothFreq);
 						
 						// calculate the array signal
-						sawtooth = new SawtoothGen(w, h, sawtoothFreq);
-						sawtooth.generate(estimateInfinity, normalAmplitude);
+						sawtooth = new SawtoothGen(numberOfSample, sawtoothFreq);
+						sawtooth.generate(normalAmplitude);
 						signal = sawtooth.getSignal();
 						signalName = sawtooth.getName();
 						

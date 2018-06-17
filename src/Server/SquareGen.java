@@ -3,12 +3,11 @@ package Server;
 public class SquareGen extends SignalGen {
 	private int PWM;
 
-	public SquareGen(int w, int h, int PWM) {
-		this.w = w;
-		this.h = h;
+	public SquareGen(int numberOfSample, int PWM) {
+		this.numberOfSample = numberOfSample;
 		this.PWM = PWM;
 		this.signal = null;
-		this.signal = new int[this.w];
+		this.signal = new int[this.numberOfSample];
 		name = "square";
 	}
 
@@ -18,7 +17,7 @@ public class SquareGen extends SignalGen {
 		double tau = duty / (double) freq;
 		double sin;
 		double cos;
-		for (int i = 0; i < w; i++) { // w samples
+		for (int i = 0; i < numberOfSample; i++) { // w samples
 			y = duty;
 			for (int j = 1; j < n; j++) {
 				sin = Math.sin(Math.PI * (double) j * freq * tau);

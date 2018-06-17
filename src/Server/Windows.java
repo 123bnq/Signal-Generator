@@ -11,6 +11,9 @@ import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
+
+import Client.Warning;
+
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.chrono.IsoChronology;
@@ -72,9 +75,11 @@ public class Windows implements Runnable {
 	 */
 	public Windows() {
 		frmServerSignal = new JFrame();
+		frmServerSignal.setResizable(false);
 		frmServerSignal.setTitle("Server - Signal generator");
 		frmServerSignal.setBounds(100, 100, 400, 250);
 		frmServerSignal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmServerSignal.setLocation(100, 100);
 
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(UIManager.getColor("Button.background"));
@@ -127,36 +132,47 @@ public class Windows implements Runnable {
 		btnStartServer = new JButton("Start Server");
 		btnStartServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addr = IPAddr.getText();
-				port = Integer.parseInt(Port.getText());
-				boolean isPort;
-				if (port >= 0 && port < 65536) {
-					isPort = true;
-				} else
-					isPort = false;
-				System.out.println(addr + validateIPAddress(addr));
-				boolean isLocalhost = addr.equals("localhost");
-				if ((isLocalhost | validateIPAddress(addr)) && isPort) {
-					// tcpserver = new TCPServer(addr, port);
-					// System.out.println(tcpserver == null);
-					// tcpthread = new Thread(tcpserver);
-					// tcpthread.start();
-					// udpserver = new
-					// UDPServer(Integer.parseInt(Port.getText()));
-					// udpthread = new Thread(udpserver);
-					// udpthread.start();
-					IPAddr.setEditable(false);
-					Port.setEditable(false);
-					btnStopServer.setEnabled(true);
-					btnStartServer.setEnabled(false);
-					win = new Windows();
-					t = new Thread(win);
-					t.start();
-				} else {
-					IPAddr.setText("");
-					IPAddr.setEditable(true);
-					Port.setText("");
-					Port.setEditable(true);
+				try {
+					if (!IPAddr.getText().equals("") && !Port.getText().equals("")) {
+						addr = IPAddr.getText();
+						port = Integer.parseInt(Port.getText());
+						boolean isPort;
+						if (port >= 0 && port < 65536) {
+							isPort = true;
+						} else {
+							isPort = false;
+							Warning warn = new Warning(frmServerSignal, "The port number is not right!!!");
+						}
+						System.out.println(addr + validateIPAddress(addr));
+						boolean isLocalhost = addr.equals("localhost");
+						if ((isLocalhost | validateIPAddress(addr)) && isPort) {
+							// tcpserver = new TCPServer(addr, port);
+							// System.out.println(tcpserver == null);
+							// tcpthread = new Thread(tcpserver);
+							// tcpthread.start();
+							// udpserver = new
+							// UDPServer(Integer.parseInt(Port.getText()));
+							// udpthread = new Thread(udpserver);
+							// udpthread.start();
+							IPAddr.setEditable(false);
+							Port.setEditable(false);
+							btnStopServer.setEnabled(true);
+							btnStartServer.setEnabled(false);
+							win = new Windows();
+							t = new Thread(win);
+							t.start();
+						} else {
+							Warning warn = new Warning(frmServerSignal, "Wrong IP address!");
+							resetTextfields();
+						} 
+					}
+					else {
+						Warning warn = new Warning(frmServerSignal, "No inputs!");
+						resetTextfields();
+					}
+				} catch (NumberFormatException e1) {
+					resetTextfields();
+					Warning warn = new Warning(frmServerSignal, "The port number is not right!!!");
 				}
 			}
 		});
@@ -180,6 +196,13 @@ public class Windows implements Runnable {
 		btnStopServer.setBounds(230, 156, 105, 23);
 		btnStopServer.setEnabled(false);
 		desktopPane.add(btnStopServer);
+	}
+	
+	private void resetTextfields() {
+		IPAddr.setText("");
+		IPAddr.setEditable(true);
+		Port.setText("");
+		Port.setEditable(true);
 	}
 
 	public boolean validateIPAddress(final String ipaddress) {
@@ -228,39 +251,3 @@ public class Windows implements Runnable {
 		}
 	}
 }
-
-// ToggleServer.addActionListener(new ActionListener() {
-// public void actionPerformed(ActionEvent e) {
-// String addr = IPAddr.getText();
-// System.out.println(addr+validateIPAddress(addr));
-// boolean isLocalhost = IPAddr.getText().equals("localhost");
-// if(ToggleServer.isSelected()){
-//
-// if (isLocalhost | validateIPAddress(addr)) {
-// TCPServer tcpserver = new TCPServer(addr, Integer.parseInt(Port.getText()));
-// tcpserver.start();
-// IPAddr.setEditable(false);
-// Port.setEditable(false);
-// }
-// else {
-// IPAddr.setText("");
-// Port.setText("");
-// }
-// }
-// else {
-//
-// try {
-// TCPServer.pw.close();
-// TCPServer.bf.close();
-// TCPServer.socketObject.close();
-// TCPServer.server.close();
-// } catch (IOException e1) {
-// // TODO Auto-generated catch block
-// e1.printStackTrace();
-// }
-// IPAddr.setEditable(true);
-// Port.setEditable(true);
-// System.out.println("Clear Input\n");
-// }
-// }
-// });
